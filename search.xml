@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Linux重启后自动执行指定脚本功能]]></title>
+    <url>%2Farchives%2F5f78267c.html</url>
+    <content type="text"><![CDATA[实现通过crontab定时任务实现 1$ crontab -e 假设需要每次重启后自动执行script脚本：/home/vivek/bin/installnetkit.sh，则只需在crontab中添加如下这一行： 1@reboot /home/vivek/bin/installnetkit.sh 当然有些脚本或命令是需要在机器重启后过指定时间后再执行,可以通过下面命令实现重启+5分钟后执行指定脚本： 1@reboot sleep 300 &amp;&amp; /home/wwwjobs/clean-static-cache.sh]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+        <tag>脚本</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo_Next主题博客接入Gitment实现评论功能]]></title>
+    <url>%2Farchives%2Faa5c621a.html</url>
+    <content type="text"><![CDATA[前言Gitment是作者实现的一款基于 GitHub Issues 的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的 Markdown / GFM 和代码高亮支持。尤为适合各种基于 GitHub Pages 的静态博客或项目页面。 接入过程1、注册 OAuth Application 通过注册地址https://github.com/settings/applications/new进行注册，注册页面如下： 注意Authorization callback URL填上自己网站首页url地址。注册成功会得到一个 client ID 和一个 client secret，将用于以下的配置文件中。 2、编辑主题配置文件_config.yml进行配置找到Gitment配置区域： 12345678910111213141516# Gitment# Introduction: https://imsun.net/posts/gitment-introduction/# You can get your Github ID from https://api.github.com/users/&lt;Github username&gt;gitment: enable: true mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway count: true # Show comments count in post meta area lazy: false # Comments lazy loading with a button cleanly: true # Hide 'Powered by ...' on footer, and more language: # Force language, or auto switch by theme github_user: yourname # MUST HAVE, Your Github ID github_repo: yourname.github.io # MUST HAVE, The repo you use to store Gitment comments client_id: d367821xxxxxxxxx # MUST HAVE, Github client id for the Gitment client_secret: 02fcxxxxxxxxxxxxxx # EITHER this or proxy_gateway, Github access secret token for the Gitment proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled 其中github_user为你的github用户名，github_repo一定要是仓库的名称，不要写成仓库地址，这里可以保持同github pages共用一个库，当然你也可以选择使用新建的仓库。client_id和client_secret就是上一步注册时得到的。 可能遇到的问题到此通过 hexo d 重新部署应该能看到博客文章页面下已出现Gitment评论区，不过可能存在一些问题。 登录报错 “[object ProgressEvent]”出错原因：在原开发者版本中调用的js文件里，有访问gitment作者的服务器代码，而作者的服务器不好使了。具体调用的js文件可以在主题第三方插件目录下看到，打开\themes\next\layout\_third-party\comments\gitment.swig文件，定位到如下部分:1234567891011&lt;!-- LOCAL: You can save these files to your site and update links --&gt; &#123;% if theme.gitment.mint %&#125; &#123;% set CommentsClass = "Gitmint" %&#125; &lt;link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css"&gt; &lt;script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"&gt;&lt;/script&gt; &#123;% else %&#125; &#123;% set CommentsClass = "Gitment" %&#125; &lt;link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"&gt; &lt;script src="https://imsun.github.io/gitment/dist/gitment.browser.js"&gt;&lt;/script&gt; &#123;% endif %&#125;&lt;!-- END LOCAL --&gt; 可以看到gitment.browser.js是原作中使用的js文件，该文件中会调用作者的服务器接口‘https://gh-oauth.imsun.net’，该接口可能已无法访问，所以我们需要自己来实现接口代替。解决方法：自己的服务器中创建实现类似作者定义的接口。 在自己的服务器中clone原作者使用的源文件： 1git clone https://github.com/imsun/gh-oauth-server.git 进入项目目录，下载依赖并启动服务： 1npm install &amp;&amp; nohup npm start &amp; 如果服务运行成功，会在项目目录下的nohup.out文件的结尾提示正在监听3000端口，接着使用nginx搭配https反向代理转发服务器本地3000端口。这样就可以使用自己的服务器网址替换前面提到的作者的接口。 我已将前面的gitment.swig文件里引用的两个js文件均作了接口替换，同时保存在了我的Hexo博客目录下，所以现在来替换swig文件中的js引用地址：12345678910111213&lt;!-- LOCAL: You can save these files to your site and update links --&gt; &#123;% if theme.gitment.mint %&#125; &#123;% set CommentsClass = "Gitmint" %&#125; &lt;link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css"&gt;- &lt;script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"&gt;&lt;/script&gt;+ &lt;script src="https://ai.xgoogle.xyz/js/src/gitmint.browser.js"&gt;&lt;/script&gt; &#123;% else %&#125; &#123;% set CommentsClass = "Gitment" %&#125; &lt;link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"&gt;- &lt;script src="https://imsun.github.io/gitment/dist/gitment.browser.js"&gt;&lt;/script&gt;+ &lt;script src="https://ai.xgoogle.xyz/js/src/gitment.browser.js"&gt;&lt;/script&gt; &#123;% endif %&#125;&lt;!-- END LOCAL --&gt; 理论上你只需将gitment.swig文件按上面这样修改后，即可在博客中正常使用Gitment评论功能了。]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>博客</tag>
+        <tag>gitment</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo_Next主题博客页面显示效果优化]]></title>
+    <url>%2Farchives%2F3e4c942.html</url>
+    <content type="text"><![CDATA[调整页面显示内容宽度原主题页面两侧留白太多就显得没有必要，并且不美观，所以有必要调整一下宽度。 编辑 /themes/next/source/css/_common/components/post/post-expand.styl 文件，找到如下位置： 123@media (max-width: 767px)改为：@media (max-width: 1060px) 编辑 /themes/next/source/css/_variables/base.styl 文件，找到如下位置： 1234567$main-desktop = 960px$main-desktop-large = 1200px$content-desktop = 700px改为：$main-desktop = 1060px$main-desktop-large = 1200px$content-desktop = 800px 调整文章正文顶部与标题行间距 编辑 /themes/next/source/css/_custom/custom.styl 文件，添加如下内容：123.posts-expand .post-meta &#123; margin: 10px 0 10px 0;&#125; 调整博客首页每篇文章之间的间距对于主题样式Mist，博客文章列表之间间距过大，整体显示效果较差，考虑调小文章间距。 编辑 /themes/next/source/css/_schemes/Mist/_posts-expanded.styl文件，找到如下位置：12345678910111213141516171819....posts-expand &#123; padding-top: 0; .post-title, .post-meta &#123; text-align: $site-meta-text-align; +mobile() &#123; text-align: center; &#125; &#125; .post-eof &#123; display: none; &#125; .post &#123; margin-top: 120px; &#125; .post:first-child &#123; margin-top: 0; &#125; .post-meta &#123; margin-top: 5px; margin-bottom: 20px; &#125;... 修改该部分跟间距相关的两行代码： 12345678910111213 .post &#123; margin-top: 120px; &#125; .post:first-child &#123; margin-top: 0; &#125;改为： .post &#123; margin-top: 20px; margin-bottom: 30px; padding-top: 10px; padding-right: 25px; padding-bottom: 10px; padding-left: 25px; &#125; .post:first-child &#123; margin-top: 0; &#125; 其中的第二句意为取消第一个文章的上边距，这里可以保持默认不作修改。 文章列表整体的外边距也可以调整，具体文件为 /themes/next/source/css/_schemes/Mist/outline/outline.styl1.main-inner &#123; margin-top: 80px; &#125; 该文件只有一行，可将边距数值适当改小，比如50px。 添加背景图片 在 /themes/next/source/css/_custom/custom.styl文件中添加一句：1body &#123; background:url(/images/background.png); &#125; 当然需将相应的背景图片文件(background.png)放到相应的目录下。由于Next主题文章页面背景默认都是透明的，所以背景图片添加后会透到文章显示中来，如此会影响文章页面阅读体验。为了改进，需同样在custom.styl文件下添加如下内容： 1234.post &#123; background: #fff; opacity: 1;&#125; 如此就可以将文章页面的背景设置为全白显示，同时完全不透明，从而不受添加的背景图片影响。 查看效果1$ hexo d --g]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>博客</tag>
+        <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo博客文章链接持久化方法]]></title>
+    <url>%2Farchives%2F52ccf080.html</url>
+    <content type="text"><![CDATA[持久化解决方案安装hexo-abbrlink插件安装使用hexo-abbrlink插件，自动根据文章时间点生成最终博客文章链接，后期不管怎么修改文章永久链接都不会再变。同时文章链接层级更短，使得博客文章更利于SEO。 1$ npm install hexo-abbrlink --save 配置文件修改站点配置文件_config.yml中相应位置按如下修改： 1234permalink: archives/:abbrlink.htmlabbrlink: alg: crc32 # 算法：crc16(default) and crc32 rep: hex # 进制：dec(default) and hex 最终效果博客文章链接地址最终呈现效果：https://yoursite.com/archives/201d9ace.html]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用Hexo博客编辑发布文章]]></title>
+    <url>%2Farchives%2F409d1dce.html</url>
+    <content type="text"><![CDATA[1、新建一篇文章(1) 在Hexo博客根目录下，进入Git Bash命令窗口中，输入以下命令： 1$ hexo new "新文章标题" (2) 在博客目录下/source/_posts文件夹下，可以看到已经生成相应的博客文件：“新文章标题.md” (3) 在该md文件中编辑博客内容。注意：Hexo发布的文章是Markdown格式，Markdown基本语法可参考：md基本语法 2、给文章添加分类和标签(1) 在md文件中设置categories和tags属性： 123456title: 在这里date: 2018-08-02 11:41:10categories: web前端tags:- 博客 //多个标签可以这样添加- hexo 3、启动服务器，本地测试1$ hexo s 4、添加“阅读全文”按钮在文章中任意想添加的位置添加： 1&lt;!--more--&gt; 5、在博客中添加图片(1) 在hexo目录下安装插件： 1$ npm install hexo-asset-image --save (2) 在hexo\source 目录下新建一个img文件夹，把图片放置在里面；(3) 在xxx.md中引用图片： 1![header]( img/header.jpg) 6、发布到Github上(1) 发表的文章在本地预览无误后，在 Git Bash 命令窗口执行以下命令： 1$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d (2) 在浏览器，访问自己的博客域名，即可看到刚 发布的文章。]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2Farchives%2F4a17b156.html</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
