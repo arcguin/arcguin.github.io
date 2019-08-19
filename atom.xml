@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>π的遐想</title>
   
-  <subtitle>关注程序员文化和编程技术分享的博客小随笔</subtitle>
+  <subtitle>关注编程技术分享和程序员文化的博客小随笔</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ai.xgoogle.xyz/"/>
