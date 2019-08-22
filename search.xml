@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Jupyter Notebook修改起始目录配置，解决不生效问题]]></title>
+    <url>%2Farchives%2Ff6dd61e.html</url>
+    <content type="text"><![CDATA[具体方法 Win键+R打开cmd命令行窗口，输入命令jupyter notebook --generate-config生成配置文件； 此步的前提是系统环境变量已配置正确，否则可能会有“jupyter不是内部或外部命令，也不是可运行的程序或批处理文件”的错误提示。这时需更新系统环境变量，或者也可直接跳过，通过下面第2点的方法生成配置文件。 使用Anaconda Prompt来创建配置文件，命令与第1点中的一样，也是jupyter notebook --generate-config，此环境下不存在找不到命令的异常。 默认情况下生成的配置文件路径为C:\Users\用户名\.jupyter\jupyter_notebook_config.py 编辑上一步的配置文件 123The directory to use for notebooks and kernels.-#c.NotebookApp.notebook_dir = ''+c.NotebookApp.notebook_dir = 'D:\\workspace\\Python\\notebook' 按上面添加指定的notebook工作目录。 在Anaconda Prompt中通过命令jupyter notebook启动，可以看到起始目录已经改成了我们自己设置的。 修改开始菜单中Jupyter Notebook的快捷方式： 操作流程：程序→Anaconda→ Jupyter Notebook→ 右键→ 属性→ 快捷方式→ 去掉“目标”一项中后面的” %USERPROFILE%” 。 此时再通过开始菜单中的快捷方式打开Notebook时，起始目录也已变成我们自己配置文件中设定的。]]></content>
+      <categories>
+        <category>工具使用</category>
+      </categories>
+      <tags>
+        <tag>jupyter</tag>
+        <tag>notebook</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Linux重启后自动执行指定脚本功能]]></title>
     <url>%2Farchives%2F5f78267c.html</url>
     <content type="text"><![CDATA[实现通过crontab定时任务实现 1$ crontab -e 假设需要每次重启后自动执行script脚本：/home/vivek/bin/installnetkit.sh，则只需在crontab中添加如下这一行： 1@reboot /home/vivek/bin/installnetkit.sh 当然有些脚本或命令是需要在机器重启后过指定时间后再执行,可以通过下面命令实现重启+5分钟后执行指定脚本： 1@reboot sleep 300 &amp;&amp; /home/wwwjobs/clean-static-cache.sh]]></content>

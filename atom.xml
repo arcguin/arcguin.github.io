@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ai.xgoogle.xyz/"/>
-  <updated>2019-08-18T06:39:00.904Z</updated>
+  <updated>2019-08-22T17:19:01.372Z</updated>
   <id>https://ai.xgoogle.xyz/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Jupyter Notebook修改起始目录配置，解决不生效问题</title>
+    <link href="https://ai.xgoogle.xyz/archives/f6dd61e.html"/>
+    <id>https://ai.xgoogle.xyz/archives/f6dd61e.html</id>
+    <published>2018-08-22T15:46:53.000Z</published>
+    <updated>2019-08-22T17:19:01.372Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="具体方法"><a href="#具体方法" class="headerlink" title="具体方法"></a>具体方法</h4><ol><li><p>Win键+R打开cmd命令行窗口，输入命令<code>jupyter notebook --generate-config</code>生成配置文件；</p><p>此步的前提是系统环境变量已配置正确，否则可能会有“jupyter不是内部或外部命令，也不是可运行的程序或批处理文件”的错误提示。这时需更新系统环境变量，或者也可直接跳过，通过下面第2点的方法生成配置文件。</p><a id="more"></a></li><li><p>使用Anaconda Prompt来创建配置文件，命令与第1点中的一样，也是<code>jupyter notebook --generate-config</code>，此环境下不存在找不到命令的异常。</p></li><li><p>默认情况下生成的配置文件路径为<code>C:\Users\用户名\.jupyter\jupyter_notebook_config.py</code></p></li><li><p>编辑上一步的配置文件</p><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The directory to use for notebooks and kernels.</span><br><span class="line"><span class="deletion">-#c.NotebookApp.notebook_dir = ''</span></span><br><span class="line"><span class="addition">+c.NotebookApp.notebook_dir = 'D:\\workspace\\Python\\notebook'</span></span><br></pre></td></tr></table></figure><p>按上面添加指定的notebook工作目录。</p></li><li><p>在Anaconda Prompt中通过命令<code>jupyter notebook</code>启动，可以看到起始目录已经改成了我们自己设置的。</p></li><li><p>修改开始菜单中Jupyter Notebook的快捷方式：</p><p>操作流程：程序→Anaconda→ Jupyter Notebook→ 右键→ 属性→ 快捷方式→ 去掉“目标”一项中后面的” %USERPROFILE%” 。</p><p>此时再通过开始菜单中的快捷方式打开Notebook时，起始目录也已变成我们自己配置文件中设定的。</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;具体方法&quot;&gt;&lt;a href=&quot;#具体方法&quot; class=&quot;headerlink&quot; title=&quot;具体方法&quot;&gt;&lt;/a&gt;具体方法&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Win键+R打开cmd命令行窗口，输入命令&lt;code&gt;jupyter notebook --generate-config&lt;/code&gt;生成配置文件；&lt;/p&gt;
+&lt;p&gt;此步的前提是系统环境变量已配置正确，否则可能会有“jupyter不是内部或外部命令，也不是可运行的程序或批处理文件”的错误提示。这时需更新系统环境变量，或者也可直接跳过，通过下面第2点的方法生成配置文件。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具使用" scheme="https://ai.xgoogle.xyz/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+    
+    
+      <category term="jupyter" scheme="https://ai.xgoogle.xyz/tags/jupyter/"/>
+    
+      <category term="notebook" scheme="https://ai.xgoogle.xyz/tags/notebook/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux重启后自动执行指定脚本功能</title>
