@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="blog,程序员,科技,技术分享,python,机器学习,神经网络,博客">
+  <meta name="keywords" content="numpy,random,python,">
 
 
 
@@ -88,17 +88,18 @@
 
 
 
-<meta name="description" content="Zero in your target, and go for it!">
-<meta name="keywords" content="blog,程序员,科技,技术分享,python,机器学习,神经网络,博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="π的遐想">
-<meta property="og:url" content="https://ai.xgoogle.xyz/tags/hexo/index.html">
+<meta name="description" content="库的导入  import numpy as np   np.random.random() :随机生成[0,1)之间的浮点数，可选择参数size=()设置生成随机数的尺寸，默认为1 1234a=np.random.random(size=(2,3))print(a)&amp;gt;&amp;gt;[[ 0.35396137  0.21659113  0.88348479] [ 0.65330978  0.2372">
+<meta name="keywords" content="numpy,random,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="numpy.random模块基础用法">
+<meta property="og:url" content="https://ai.xgoogle.xyz/archives/d8f75e23.html">
 <meta property="og:site_name" content="π的遐想">
-<meta property="og:description" content="Zero in your target, and go for it!">
+<meta property="og:description" content="库的导入  import numpy as np   np.random.random() :随机生成[0,1)之间的浮点数，可选择参数size=()设置生成随机数的尺寸，默认为1 1234a=np.random.random(size=(2,3))print(a)&amp;gt;&amp;gt;[[ 0.35396137  0.21659113  0.88348479] [ 0.65330978  0.2372">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-23T14:49:02.438Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="π的遐想">
-<meta name="twitter:description" content="Zero in your target, and go for it!">
+<meta name="twitter:title" content="numpy.random模块基础用法">
+<meta name="twitter:description" content="库的导入  import numpy as np   np.random.random() :随机生成[0,1)之间的浮点数，可选择参数size=()设置生成随机数的尺寸，默认为1 1234a=np.random.random(size=(2,3))print(a)&amp;gt;&amp;gt;[[ 0.35396137  0.21659113  0.88348479] [ 0.65330978  0.2372">
 
 
 
@@ -128,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://ai.xgoogle.xyz/tags/hexo/">
+  <link rel="canonical" href="https://ai.xgoogle.xyz/archives/d8f75e23.html">
 
 
 
 
 
-  <title>标签: hexo | π的遐想</title>
+  <title>numpy.random模块基础用法 | π的遐想</title>
   
 
 
@@ -153,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/arcguin" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -290,130 +291,259 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>hexo<small>标签</small>
-        </h2>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ai.xgoogle.xyz/archives/d8f75e23.html">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一只小π">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="π的遐想">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/archives/aa5c621a.html" itemprop="url">
-              
-                <span itemprop="name">Hexo_Next主题博客接入Gitment实现评论功能</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">numpy.random模块基础用法</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-18T12:23:54+08:00" content="2018-08-18">
-          08-18
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-23T22:19:15+08:00">
+                2018-08-23
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/archives/d8f75e23.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/archives/d8f75e23.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  493
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/archives/3e4c942.html" itemprop="url">
-              
-                <span itemprop="name">Hexo_Next主题博客页面显示效果优化</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-16T23:31:53+08:00" content="2018-08-16">
-          08-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <p><strong>库的导入</strong></p>
+<blockquote>
+<p>import numpy as np</p>
+</blockquote>
+<ol>
+<li><p>np.random.random() :随机生成[0,1)之间的浮点数，可选择参数size=()设置生成随机数的尺寸，默认为1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.random(size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[ <span class="number">0.35396137</span>  <span class="number">0.21659113</span>  <span class="number">0.88348479</span>]</span><br><span class="line"> [ <span class="number">0.65330978</span>  <span class="number">0.23728751</span>  <span class="number">0.56109208</span>]]</span><br></pre></td></tr></table></figure>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/archives/52ccf080.html" itemprop="url">
-              
-                <span itemprop="name">Hexo博客文章链接持久化方法</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-15T22:49:35+08:00" content="2018-08-15">
-          08-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/archives/409d1dce.html" itemprop="url">
-              
-                <span itemprop="name">使用Hexo博客编辑发布文章</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-14T12:48:58+08:00" content="2018-08-14">
-          08-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+<a id="more"></a>
+</li>
+<li><p>np.random.rand():生成[0, 1)间随机数 ，和np.random.random相比，除了输入参数的格式不同，其他没啥区别</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x=np.random.rand(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;[[ <span class="number">0.37399521</span>  <span class="number">0.48735693</span>  <span class="number">0.20704647</span>]</span><br><span class="line"> [ <span class="number">0.80814041</span>  <span class="number">0.31231348</span>  <span class="number">0.23810419</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.randint(low, high=None, size=None, dtype=<strong>‘l’</strong>):产生随机整数[low,high)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.randint(<span class="number">0</span>,<span class="number">7</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) </span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">3</span> <span class="number">5</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line">a=np.random.randint(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) <span class="comment">#若只设置一个参数，则表示[0,low）</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">3</span> <span class="number">3</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.random_integers(low, high=None, size=None)：取值范围：若high不为None，则取[low,high]之间随机整数，否则取[1,low]之间随机整数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.random_integers(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>))  <span class="comment">#此函数会报warnig, This function is deprecated</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">3</span> <span class="number">5</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">2</span> <span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.normal(loc=0.0, scale=1.0, size=None): 高斯分布随机数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.normal(loc=<span class="number">1</span>,scale=<span class="number">0.5</span>,size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">0.56762094</span> <span class="number">1.85984684</span> <span class="number">0.80333823</span>]</span><br><span class="line"> [<span class="number">1.27362216</span> <span class="number">1.24186823</span> <span class="number">1.09520804</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.randn():标准正态分布随机数(和上面的区别在于这个函数的方差和均值为1和0，为固定值，上面那个normal函数的方差均值可改变)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.randn(<span class="number">2</span>,<span class="number">3</span>)  <span class="comment">#直接输入维数，不接受元组</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">-0.05165023</span> <span class="number">-0.33677039</span> <span class="number">-0.45092475</span>]</span><br><span class="line"> [ <span class="number">0.84170895</span>  <span class="number">2.50748773</span>  <span class="number">3.44787468</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.shuffle(): 将序列的所有元素随机排序 ，传入参数可以是一个序列或者元组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x=list(range(<span class="number">5</span>))</span><br><span class="line">print(x)</span><br><span class="line">np.random.shuffle(x)  <span class="comment">#对x自身进行修改</span></span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.choice():可以从序列(字符串、列表、元组等)中选取随机项,不过功能远不止这些</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=np.random.choice([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>])</span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;d</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
+    
+    
+    
 
+	<div>
+	  
+	    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">--------本文结束<i class="fa fa-paw"></i>感谢您的阅读--------</div>
+    
+</div>
+	  
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/numpy/" rel="tag"><i class="fa fa-tag"></i> numpy</a>
+          
+            <a href="/tags/random/" rel="tag"><i class="fa fa-tag"></i> random</a>
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/f6dd61e.html" rel="next" title="Jupyter Notebook修改起始目录配置，解决不生效问题">
+                <i class="fa fa-chevron-left"></i> Jupyter Notebook修改起始目录配置，解决不生效问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -421,6 +551,17 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -742,6 +883,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -793,6 +938,30 @@
       </style>
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'arcguin',
+            repo: 'arcguin.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '02fc44ee46e44cac5cd4a538a77388b9ad2a0fed',
+            
+                client_id: 'd26109a89ca43e9c4319'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
     
 
 

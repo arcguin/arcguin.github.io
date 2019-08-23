@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[numpy.random模块基础用法]]></title>
+    <url>%2Farchives%2Fd8f75e23.html</url>
+    <content type="text"><![CDATA[库的导入 import numpy as np np.random.random() :随机生成[0,1)之间的浮点数，可选择参数size=()设置生成随机数的尺寸，默认为1 1234a=np.random.random(size=(2,3))print(a)&gt;&gt;[[ 0.35396137 0.21659113 0.88348479] [ 0.65330978 0.23728751 0.56109208]] np.random.rand():生成[0, 1)间随机数 ，和np.random.random相比，除了输入参数的格式不同，其他没啥区别 1234x=np.random.rand(2,3)print(x)&gt;&gt;[[ 0.37399521 0.48735693 0.20704647] [ 0.80814041 0.31231348 0.23810419]] np.random.randint(low, high=None, size=None, dtype=‘l’):产生随机整数[low,high) 123456789a=np.random.randint(0,7,size=(2,3)) print(a)&gt;&gt;[[3 5 1] [1 2 4]]a=np.random.randint(5,size=(2,3)) #若只设置一个参数，则表示[0,low）print(a)&gt;&gt;[[1 2 4] [0 3 3]] np.random.random_integers(low, high=None, size=None)：取值范围：若high不为None，则取[low,high]之间随机整数，否则取[1,low]之间随机整数 1234a=np.random.random_integers(5,size=(2,3)) #此函数会报warnig, This function is deprecatedprint(a)&gt;&gt;[[1 3 5] [4 2 1]] np.random.normal(loc=0.0, scale=1.0, size=None): 高斯分布随机数 1234a=np.random.normal(loc=1,scale=0.5,size=(2,3))print(a)&gt;&gt;[[0.56762094 1.85984684 0.80333823] [1.27362216 1.24186823 1.09520804]] np.random.randn():标准正态分布随机数(和上面的区别在于这个函数的方差和均值为1和0，为固定值，上面那个normal函数的方差均值可改变) 1234a=np.random.randn(2,3) #直接输入维数，不接受元组print(a)&gt;&gt;[[-0.05165023 -0.33677039 -0.45092475] [ 0.84170895 2.50748773 3.44787468]] np.random.shuffle(): 将序列的所有元素随机排序 ，传入参数可以是一个序列或者元组 123456x=list(range(5))print(x)np.random.shuffle(x) #对x自身进行修改print(x)&gt;&gt;[0, 1, 2, 3, 4]&gt;&gt;[0, 4, 3, 1, 2] np.random.choice():可以从序列(字符串、列表、元组等)中选取随机项,不过功能远不止这些 123x=np.random.choice(['a','b','c','d','e'])print(x)&gt;&gt;d]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>numpy</tag>
+        <tag>random</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Jupyter Notebook修改起始目录配置，解决不生效问题]]></title>
     <url>%2Farchives%2Ff6dd61e.html</url>
     <content type="text"><![CDATA[具体方法 Win键+R打开cmd命令行窗口，输入命令jupyter notebook --generate-config生成配置文件； 此步的前提是系统环境变量已配置正确，否则可能会有“jupyter不是内部或外部命令，也不是可运行的程序或批处理文件”的错误提示。这时需更新系统环境变量，或者也可直接跳过，通过下面第2点的方法生成配置文件。 使用Anaconda Prompt来创建配置文件，命令与第1点中的一样，也是jupyter notebook --generate-config，此环境下不存在找不到命令的异常。 默认情况下生成的配置文件路径为C:\Users\用户名\.jupyter\jupyter_notebook_config.py 编辑上一步的配置文件 123The directory to use for notebooks and kernels.-#c.NotebookApp.notebook_dir = ''+c.NotebookApp.notebook_dir = 'D:\\workspace\\Python\\notebook' 按上面添加指定的notebook工作目录。 在Anaconda Prompt中通过命令jupyter notebook启动，可以看到起始目录已经改成了我们自己设置的。 修改开始菜单中Jupyter Notebook的快捷方式： 操作流程：程序→Anaconda→ Jupyter Notebook→ 右键→ 属性→ 快捷方式→ 去掉“目标”一项中后面的” %USERPROFILE%” 。 此时再通过开始菜单中的快捷方式打开Notebook时，起始目录也已变成我们自己配置文件中设定的。]]></content>
