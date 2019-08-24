@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ai.xgoogle.xyz/"/>
-  <updated>2019-08-23T14:49:02.438Z</updated>
+  <updated>2019-08-24T16:00:11.621Z</updated>
   <id>https://ai.xgoogle.xyz/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo博客中创建自定义html页面的方法</title>
+    <link href="https://ai.xgoogle.xyz/archives/a71b4c60.html"/>
+    <id>https://ai.xgoogle.xyz/archives/a71b4c60.html</id>
+    <published>2018-08-27T15:37:39.000Z</published>
+    <updated>2019-08-24T16:00:11.621Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>在Hexo博客中有时需要创建自定义的html页面，这时该如何实现？</p></blockquote><p>Hexo中我们使用的是markdown格式的文件，渲染出来的博客页面默认都是有主题样式的。如果不希望指定页面使用主题样式，只需在对应的md文件头部增加一个<code>layout: false</code>的配置即可。如下所示：</p><a id="more"></a><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">尝试创建自定义的html文件，不使用默认的主题样式</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="bullet">-08</span><span class="bullet">-27</span> <span class="number">23</span><span class="string">:25:24</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">综合</span></span><br><span class="line"><span class="attr">tags:</span> <span class="string">[综合]</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">layout:</span> <span class="literal">false</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure><p>这样博客生成的html文件就不会被主题所渲染。</p><hr><p>另外，在Hexo博客中，我们是可以直接创建html文件的，只不过默认生成时也是会被主题渲染，出来的页面还是会有主题样式。此时需用到另一种方法来屏蔽渲染。</p><p><strong>使用<code>skip_render</code></strong></p><p><code>skip_render</code> 的配置在 <strong>站点配置文件</strong> 中。</p><p>只有 <code>source</code> 目录下的文件才会发布到 <code>public</code>（能够在网络上访问到），因此 Hexo 只渲染 <code>source</code> 目录下的文件。<code>skip_render</code> 参数设置的路径是相对于 <code>source</code> 目录的路径。比如:</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">skip_render:</span> test.html</span><br></pre></td></tr></table></figure><p>注意，千万不要写成<code>/test.html</code>，这里只能填相对于source文件夹的相对路径。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;在Hexo博客中有时需要创建自定义的html页面，这时该如何实现？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Hexo中我们使用的是markdown格式的文件，渲染出来的博客页面默认都是有主题样式的。如果不希望指定页面使用主题样式，只需在对应的md文件头部增加一个&lt;code&gt;layout: false&lt;/code&gt;的配置即可。如下所示：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Hexo" scheme="https://ai.xgoogle.xyz/categories/Hexo/"/>
+    
+    
+      <category term="hexo" scheme="https://ai.xgoogle.xyz/tags/hexo/"/>
+    
+      <category term="博客" scheme="https://ai.xgoogle.xyz/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>numpy.random模块基础用法</title>
