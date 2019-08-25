@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="blog,程序员,科技,技术分享,python,机器学习,神经网络,博客">
+  <meta name="keywords" content="python,mnist,数据集,sklearn,">
 
 
 
@@ -88,17 +88,23 @@
 
 
 
-<meta name="description" content="Zero in your target, and go for it!">
-<meta name="keywords" content="blog,程序员,科技,技术分享,python,机器学习,神经网络,博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="π的遐想">
-<meta property="og:url" content="https://ai.xgoogle.xyz/tags/python/index.html">
+<meta name="description" content="引言 介绍机器学习领域两大训练数据集：MNIST和Fashion-MNIST，除了基本的简介外，还包括编程中(Python)如何加载引用这两大类数据。  经典MNIST数据集经典MNIST数据集包含了大量的手写数字，来自美国国家标准与技术研究所，由不同人手写的0至9的数字构成，由60000个训练样本集和10000个测试样本集构成，每个样本的尺寸为28x28，以二进制格式存储，如下图所示：">
+<meta name="keywords" content="python,mnist,数据集,sklearn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习训练数据集：经典MNIST和Fashion-MNIST数据集">
+<meta property="og:url" content="https://ai.xgoogle.xyz/archives/6be60555.html">
 <meta property="og:site_name" content="π的遐想">
-<meta property="og:description" content="Zero in your target, and go for it!">
+<meta property="og:description" content="引言 介绍机器学习领域两大训练数据集：MNIST和Fashion-MNIST，除了基本的简介外，还包括编程中(Python)如何加载引用这两大类数据。  经典MNIST数据集经典MNIST数据集包含了大量的手写数字，来自美国国家标准与技术研究所，由不同人手写的0至9的数字构成，由60000个训练样本集和10000个测试样本集构成，每个样本的尺寸为28x28，以二进制格式存储，如下图所示：">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ai.xgoogle.xyz/archives/img/mnist.jpg">
+<meta property="og:image" content="https://ai.xgoogle.xyz/archives/img/mnist-01.png">
+<meta property="og:image" content="https://ai.xgoogle.xyz/archives/img/fashion-mnist-sprite.png">
+<meta property="og:image" content="https://ai.xgoogle.xyz/archives/img/mnist-02.png">
+<meta property="og:updated_time" content="2019-08-25T08:44:15.437Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="π的遐想">
-<meta name="twitter:description" content="Zero in your target, and go for it!">
+<meta name="twitter:title" content="机器学习训练数据集：经典MNIST和Fashion-MNIST数据集">
+<meta name="twitter:description" content="引言 介绍机器学习领域两大训练数据集：MNIST和Fashion-MNIST，除了基本的简介外，还包括编程中(Python)如何加载引用这两大类数据。  经典MNIST数据集经典MNIST数据集包含了大量的手写数字，来自美国国家标准与技术研究所，由不同人手写的0至9的数字构成，由60000个训练样本集和10000个测试样本集构成，每个样本的尺寸为28x28，以二进制格式存储，如下图所示：">
+<meta name="twitter:image" content="https://ai.xgoogle.xyz/archives/img/mnist.jpg">
 
 
 
@@ -128,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://ai.xgoogle.xyz/tags/python/">
+  <link rel="canonical" href="https://ai.xgoogle.xyz/archives/6be60555.html">
 
 
 
 
 
-  <title>标签: python | π的遐想</title>
+  <title>机器学习训练数据集：经典MNIST和Fashion-MNIST数据集 | π的遐想</title>
   
 
 
@@ -153,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <!-- 
     <a href="https://github.com/arcguin" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -291,78 +297,253 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>python<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ai.xgoogle.xyz/archives/6be60555.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一只小π">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="π的遐想">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/archives/6be60555.html" itemprop="url">
-              
-                <span itemprop="name">机器学习训练数据集：经典MNIST和Fashion-MNIST数据集</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">机器学习训练数据集：经典MNIST和Fashion-MNIST数据集</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-02T15:35:09+08:00" content="2018-09-02">
-          09-02
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-02T15:35:09+08:00">
+                2018-09-02
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/archives/6be60555.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/archives/6be60555.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  603
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
+<p>介绍机器学习领域两大训练数据集：MNIST和Fashion-MNIST，除了基本的简介外，还包括编程中(Python)如何加载引用这两大类数据。</p>
+</blockquote>
+<h3 id="经典MNIST数据集"><a href="#经典MNIST数据集" class="headerlink" title="经典MNIST数据集"></a>经典MNIST数据集</h3><p><a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">经典MNIST数据集</a>包含了大量的手写数字，来自美国国家标准与技术研究所，由不同人手写的0至9的数字构成，由60000个训练样本集和10000个测试样本集构成，每个样本的尺寸为28x28，以二进制格式存储，如下图所示：</p>
+<a id="more"></a>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/archives/d8f75e23.html" itemprop="url">
-              
-                <span itemprop="name">numpy.random模块基础用法</span>
-              
-            </a>
-        
-      </h2>
+<p><img src="img/mnist.jpg" alt></p>
+<p>十几年来，来自机器学习、机器视觉、人工智能、深度学习领域的研究员们把这个数据集作为衡量算法的基准之一。你会在很多的会议，期刊的论文中发现这个数据集的身影。实际上，MNIST数据集已经成为算法作者的必测的数据集之一。有人曾调侃道：” 如果一个算法在MNIST不work, 那么它就根本没法用；而如果它在MNIST上work, 它在其他数据上也可能不work！”</p>
+<h4 id="数据的加载"><a href="#数据的加载" class="headerlink" title="数据的加载"></a>数据的加载</h4><p>使用 sklearn 库的 datasets 来加载数据(<a href="http://scikit-learn.org/stable/datasets/index.html" target="_blank" rel="noopener">更多datasets数据集说明</a>)，matplotlib 作为可视化绘图工具。示例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_openml</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">mnist = fetch_openml(<span class="string">'mnist_784'</span>)</span><br><span class="line">mnist.keys()</span><br><span class="line">&gt;&gt;dict_keys([<span class="string">'data'</span>, <span class="string">'target'</span>, <span class="string">'feature_names'</span>, <span class="string">'DESCR'</span>, <span class="string">'details'</span>, <span class="string">'categories'</span>, <span class="string">'url'</span>])</span><br><span class="line"></span><br><span class="line">digit = mnist.data[<span class="number">0</span>]</span><br><span class="line">digit_image = digit.reshape(<span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"></span><br><span class="line">plt.imshow(digit_image, cmap=matplotlib.cm.binary)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-23T22:19:15+08:00" content="2018-08-23">
-          08-23
-        </time>
-      </div>
+<p><img src="img/mnist-01.png" alt></p>
+<p>验证图片对应的目标值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mnist.target[<span class="number">0</span>]</span><br><span class="line">&gt;&gt;<span class="string">'5'</span></span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<h3 id="Fashion-MNIST数据集"><a href="#Fashion-MNIST数据集" class="headerlink" title="Fashion-MNIST数据集"></a>Fashion-MNIST数据集</h3><p><a href="https://github.com/zalandoresearch/fashion-mnist/blob/master/README.zh-CN.md" target="_blank" rel="noopener">Fashion-MNIST</a>是一个替代<a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">经典MNIST手写数字集</a>的图像数据集。 它是由Zalando（一家德国的时尚科技公司）旗下的<a href="https://research.zalando.com/" target="_blank" rel="noopener">研究部门</a>提供。其涵盖了来自10种类别的共7万个不同商品的正面图片。Fashion-MNIST的大小、格式和训练集/测试集划分与原始的MNIST完全一致。60000/10000的训练测试数据划分，28x28的灰度图片。你可以直接用它来测试你的机器学习和深度学习算法性能，且<strong>不需要</strong>改动任何的代码。</p>
+<p>这个数据集的样子大致如下（每个类别占三行）：</p>
+<p><img src="img/fashion-mnist-sprite.png" alt></p>
+<h4 id="数据的加载-1"><a href="#数据的加载-1" class="headerlink" title="数据的加载"></a>数据的加载</h4><p>Python 中示例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_openml</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">fashion_mnist = fetch_openml(<span class="string">'Fashion-MNIST'</span>)</span><br><span class="line">fashion_mnist.keys()</span><br><span class="line">&gt;&gt;dict_keys([<span class="string">'data'</span>, <span class="string">'target'</span>, <span class="string">'feature_names'</span>, <span class="string">'DESCR'</span>, <span class="string">'details'</span>, <span class="string">'categories'</span>, <span class="string">'url'</span>])</span><br><span class="line"></span><br><span class="line">fashion_image = fashion_mnist.data[<span class="number">1</span>].reshape(<span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"></span><br><span class="line">plt.imshow(fashion_image, cmap=matplotlib.cm.binary)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 
+<p>打印的图片：</p>
+<p><img src="img/mnist-02.png" alt></p>
 
       
     </div>
+    
+    
+    
 
+	<div>
+	  
+	    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">--------本文结束<i class="fa fa-paw"></i>感谢您的阅读--------</div>
+    
+</div>
+	  
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/mnist/" rel="tag"><i class="fa fa-tag"></i> mnist</a>
+          
+            <a href="/tags/数据集/" rel="tag"><i class="fa fa-tag"></i> 数据集</a>
+          
+            <a href="/tags/sklearn/" rel="tag"><i class="fa fa-tag"></i> sklearn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/a71b4c60.html" rel="next" title="Hexo博客中创建自定义html页面的方法">
+                <i class="fa fa-chevron-left"></i> Hexo博客中创建自定义html页面的方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -370,6 +551,17 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -392,8 +584,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -521,6 +722,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#经典MNIST数据集"><span class="nav-number">1.1.</span> <span class="nav-text">经典MNIST数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据的加载"><span class="nav-number">1.1.1.</span> <span class="nav-text">数据的加载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fashion-MNIST数据集"><span class="nav-number">1.2.</span> <span class="nav-text">Fashion-MNIST数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据的加载-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">数据的加载</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -694,6 +911,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -745,6 +966,30 @@
       </style>
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'arcguin',
+            repo: 'arcguin.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '02fc44ee46e44cac5cd4a538a77388b9ad2a0fed',
+            
+                client_id: 'd26109a89ca43e9c4319'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
     
 
 
