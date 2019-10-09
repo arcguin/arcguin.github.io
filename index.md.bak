@@ -1,0 +1,246 @@
+---
+title: XXX
+date: 2019-08-24 16:06:15
+layout: false
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>你的标题</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.7/fullpage.css"/>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+<!-- Google font -->
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.7/fullpage.js"></script>
+<style type="text/css">
+.text {
+	text-align: left;
+	display: inline-block;
+}
+.aword {
+	font-family: 'Noto Serif SC', serif;
+	line-height: 2;
+	text-align: center;
+}
+.aword-active {
+	font-family: 'Zhi Mang Xing', cursive;
+	line-height: 2;
+	text-align: center;
+}
+.aword-by,.aword-active-by {
+	font-family: 'Noto Serif SC', serif;
+	margin-left: 1000px;
+	line-height: 3;
+	color: #555;
+}
+
+.aword-p1 {
+    text-align: center;
+  	width: 500px;
+  	margin: 0 auto;
+  	margin-top: 250;
+}
+</style>
+
+<!-- 控制图片旋转 -->
+<script>
+	var rotateVal = 0 // 旋转角度
+	var InterVal // 定时器
+	window.onload = function () {
+		// 网页加载完成后即运行rotate函数
+		rotate()
+		// 鼠标悬浮在图片上时，停止旋转，即清除定时器
+		document.getElementById('img').onmousemove = function () {
+			clearInterval(InterVal)
+		}
+		// 鼠标离开图片时，继续旋转，即继续运行定时器
+		document.getElementById('img').onmouseleave = function () {
+			rotate()
+		}
+	}
+
+	// 设置定时器
+	function rotate () {
+		InterVal = setInterval(function () {
+			var img = document.getElementById('img')
+			rotateVal += 1
+			// 设置旋转属性(顺时针)
+			img.style.transform = 'rotate(' + rotateVal + 'deg)'
+			// 设置旋转属性(逆时针)
+			//img.style.transform = 'rotate(-' + rotateVal + 'deg)'
+			// 设置旋转时的动画  匀速0.1s
+			img.style.transition = 'linear'
+		}, 5) // 数值越小速度越快
+	}
+</script>
+
+</head>
+<body>
+
+<div id="fullpage">
+	<div class="section active">
+		<div class="aword-active" style="font-size: 70px">
+        人海似海却无岸
+    	</div>
+    	<div class="aword-active-by" style="font-size: 18px; text-align: center;">
+        往下翻点击左右两边可以看到更多哦
+    	</div>
+    	<div class="aword-p1">
+    		<img id="img" src="图片">
+    	</div>
+	</div>
+	<div class="section">
+		<div class="slide">
+			<div class="aword" style="font-size: 35px">
+				<p class="text">
+	        小二 上酒
+	        	</p>
+	    	</div>
+	      	<br>
+	      	<div class="aword-by" style="font-size: 18px">
+	        ——《雪中悍刀行》
+	    	</div>
+    	</div>
+		<div class="slide">
+			<div class="aword" style="font-size: 35px">
+				<p class="text">
+	        五十年鸿业，说与山鬼听
+	    		</p>
+	    	</div>
+	      	<br>
+	      	<div class="aword-by" style="font-size: 18px">
+	        ——《雪中悍刀行》
+	    	</div>
+    	</div>
+		<div class="slide">
+			<div class="aword" style="font-size: 35px">
+				<p class="text">
+	        人生当苦无妨，良人当归即好
+	        	</p>
+	    	</div>
+	      	<br>
+	      	<div class="aword-by" style="font-size: 18px">
+	        ——《雪中悍刀行》
+	    	</div>
+    	</div>
+	</div>
+	<div class="section">
+		<div class="slide">
+			<div class="aword" style="font-size: 30px">
+				<p class="text">
+	        天地无用，不入我眼。日月无用，不可同在。昆仑无用，不来就我<br>
+	        恻隐无用，道貌岸然。清净无用，两袖空空。大江无用，东去不返<br>
+	        风雪无用，不能饱暖。青草无用，一岁一枯。因果无用，皆是定数<br>
+	        江湖无用，两两相忘……<br>
+	        参禅无用，成甚么佛？！
+	        	</p>
+	    	</div>
+	      	<br>
+	      	<div class="aword-by" style="font-size: 18px">
+	        ——《雪中悍刀行》
+	    	</div>
+    	</div>
+	</div>
+	<div class="section">
+		<div class="slide">
+			<div class="aword" style="font-size: 35px">
+				<p class="text">
+	        我见过沧海的云，巫峡的雨<br>
+我见过一月的雪覆于白山，又渐变于葱茏<br>
+我在峨眉的林里云兴霞蔚，一径之后，雾水成露，沾于衣襟<br>
+我听过柔橹漂浮，声声入水，又归于沉寂<br>
+我看到春风，八里十里，衣袖带花<br>
+无论何时忆起，它们实在是人生可喜，但都不如我此刻遇到的你
+	</p>
+	    	</div>
+	      	<br>
+	      	<div class="aword-by" style="font-size: 18px">
+	        —— 无名
+	        </div>
+    	</div>
+	</div>
+    <div class="section">
+        <div class="slide">
+            <div class="aword" style="font-size: 35px">
+                <p class="text">
+	        我q见过沧海的云，巫峡的雨<br>
+我见过一月的雪覆于白山，又渐变于葱茏<br>
+我在峨眉的林里云兴霞蔚，一径之后，雾水成露，沾于衣襟<br>
+我听过柔橹漂浮，声声入水，又归于沉寂<br>
+我看到春风，八里十里，衣袖带花<br>
+无论何时忆起，它们实在是人生可喜，但都不如我此刻遇到的你
+	</p>
+	    	</div>
+	      	<br>
+	      	<div class="aword-by" style="font-size: 18px">
+ —— 有名
+	        </div>
+    	</div>
+	</div>  
+<div class="section">
+<div class="slide">
+<div class="aword" style="font-size: 35px">
+<p class="text">
+我是一条测试雨<br>
+    这是第二条<br>
+</p>
+</div>
+<br>
+<div class="aword-by" style="font-size: 18px">
+ —— 有名
+</div>
+</div>
+</div>
+    <br>
+<div class="section">
+<div class="slide">
+<div class="aword" style="font-size: 35px">
+<p class="text">
+我是第三条<br>
+    这是第三条<br>
+</p>
+</div>
+<br>
+<div class="aword-by" style="font-size: 18px">
+ —— 有名
+</div>
+</div>
+</div>
+    <br>
+<div class="section">
+<div class="slide">
+<div class="aword" style="font-size: 35px">
+<p class="text">
+我是第四条，4条444<br>
+    这是第4条<br>
+</p>
+</div>
+<br>
+<div class="aword-by" style="font-size: 18px">
+ —— 有名
+</div>
+</div>
+</div>
+    <br>
+</div>
+
+<!--激活fullpage效果-->
+
+<script>
+$(document).ready(function(){
+  $('#fullpage').fullpage();
+});
+$(document).on('click', '.aword-p1', function(){
+  fullpage_api.moveSectionDown();
+});
+</script>
+
+</body>
+</html>

@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="π的遐想">
 <meta property="og:description" content="库的导入  import numpy as np   np.random.random() :随机生成[0,1)之间的浮点数，可选择参数size=()设置生成随机数的尺寸，默认为1 1234a=np.random.random(size=(2,3))print(a)&amp;gt;&amp;gt;[[ 0.35396137  0.21659113  0.88348479] [ 0.65330978  0.2372">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-23T14:49:02.438Z">
+<meta property="og:updated_time" content="2019-08-28T10:29:50.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="numpy.random模块基础用法">
 <meta name="twitter:description" content="库的导入  import numpy as np   np.random.random() :随机生成[0,1)之间的浮点数，可选择参数size=()设置生成随机数的尺寸，默认为1 1234a=np.random.random(size=(2,3))print(a)&amp;gt;&amp;gt;[[ 0.35396137  0.21659113  0.88348479] [ 0.65330978  0.2372">
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  493
+                  544
                 </span>
               
 
@@ -457,7 +457,7 @@
 <li><p>np.random.randint(low, high=None, size=None, dtype=<strong>‘l’</strong>):产生随机整数[low,high)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.randint(<span class="number">0</span>,<span class="number">7</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) </span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">3</span> <span class="number">5</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line">a=np.random.randint(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) <span class="comment">#若只设置一个参数，则表示[0,low）</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">3</span> <span class="number">3</span>]]</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>np.random.random_integers(low, high=None, size=None)：取值范围：若high不为None，则取[low,high]之间随机整数，否则取[1,low]之间随机整数</p>
+<li><p>np.random.random_integers(low, high=None, size=None)：取值范围：若high不为None，则取[low,high)之间随机整数，否则取[1,low)之间随机整数</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.random_integers(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>))  <span class="comment">#此函数会报warnig, This function is deprecated</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">3</span> <span class="number">5</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">2</span> <span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>np.random.normal(loc=0.0, scale=1.0, size=None): 高斯分布随机数</p>
@@ -466,6 +466,13 @@
 <li><p>np.random.randn():标准正态分布随机数(和上面的区别在于这个函数的方差和均值为1和0，为固定值，上面那个normal函数的方差均值可改变)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.randn(<span class="number">2</span>,<span class="number">3</span>)  <span class="comment">#直接输入维数，不接受元组</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">-0.05165023</span> <span class="number">-0.33677039</span> <span class="number">-0.45092475</span>]</span><br><span class="line"> [ <span class="number">0.84170895</span>  <span class="number">2.50748773</span>  <span class="number">3.44787468</span>]]</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>np.random.uniform(low=0, high=1, size=None):  从一个均匀分布[low,high)中随机采样浮点数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.uniform(<span class="number">0</span>, <span class="number">100</span>, size=(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">91.76418491</span>, <span class="number">93.00838446</span>, <span class="number">89.42534774</span>],</span><br><span class="line"> [<span class="number">26.35315009</span>, <span class="number">49.92301921</span>, <span class="number">46.1115719</span> ]]</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<ol start="8">
 <li><p>np.random.shuffle(): 将序列的所有元素随机排序 ，传入参数可以是一个序列或者元组</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x=list(range(<span class="number">5</span>))</span><br><span class="line">print(x)</span><br><span class="line">np.random.shuffle(x)  <span class="comment">#对x自身进行修改</span></span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
 </li>
@@ -748,7 +755,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">4.1k</span>
+    <span title="Site words total count">4.2k</span>
   
 -->
 
@@ -782,7 +789,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共4.1k字</span>
+  <span class="post-count">博客全站共4.2k字</span>
 </div>
 
 <div style="display:none">

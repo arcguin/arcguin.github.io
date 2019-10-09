@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="π的遐想">
 <meta property="og:description" content="实现通过crontab定时任务实现 1$ crontab -e   假设需要每次重启后自动执行script脚本：/home/vivek/bin/installnetkit.sh，则只需在crontab中添加如下这一行： 1@reboot /home/vivek/bin/installnetkit.sh  当然有些脚本或命令是需要在机器重启后过指定时间后再执行,可以通过下面命令实现重启+5分钟后执行">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-18T06:39:00.904Z">
+<meta property="og:updated_time" content="2019-10-09T02:23:07.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux重启后自动执行指定脚本功能">
 <meta name="twitter:description" content="实现通过crontab定时任务实现 1$ crontab -e   假设需要每次重启后自动执行script脚本：/home/vivek/bin/installnetkit.sh，则只需在crontab中添加如下这一行： 1@reboot /home/vivek/bin/installnetkit.sh  当然有些脚本或命令是需要在机器重启后过指定时间后再执行,可以通过下面命令实现重启+5分钟后执行">
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  116
+                  211
                 </span>
               
 
@@ -449,8 +449,20 @@
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@reboot</span> <span class="regexp">/home/</span>vivek<span class="regexp">/bin/</span>installnetkit.sh</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>当然有些脚本或命令是需要在机器重启后过指定时间后再执行,可以通过下面命令实现重启+5分钟后执行指定脚本：</p>
-<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">@reboot</span> <span class="built_in">sleep</span> <span class="number">300</span> &amp;&amp; /home/wwwjobs/clean-<span class="keyword">static</span>-cache.sh</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">@reboot</span> <span class="built_in">sleep</span> <span class="number">300</span> &amp;&amp; /home/wwwjobs/clean-<span class="keyword">static</span>-cache.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定时重启设备：</p>
+</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">58 3 * * 0 date&gt;&gt;cronlog</span><br><span class="line">0 4 * * 0 /sbin/reboot</span><br></pre></td></tr></table></figure>
+
+<p>如上两条语句实现每周日3:58分保存当时的时间到/root/cronlog文件中，随后在4:00重启机器。 </p>
+<p>如果想每天执行一次重启，只需这样：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">58 3 * * * date&gt;&gt;cronlog</span><br><span class="line">0 4 * * * /sbin/reboot</span><br></pre></td></tr></table></figure>
+
+<p>每两天执行一次：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">58 3 */2 * * date&gt;&gt;cronlog</span><br><span class="line">0 4 */2 * * /sbin/reboot</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -750,7 +762,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">4.1k</span>
+    <span title="Site words total count">4.2k</span>
   
 -->
 
@@ -784,7 +796,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共4.1k字</span>
+  <span class="post-count">博客全站共4.2k字</span>
 </div>
 
 <div style="display:none">
