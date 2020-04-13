@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ai.xgoogle.xyz/"/>
-  <updated>2020-04-13T13:11:39.020Z</updated>
+  <updated>2020-04-13T13:18:13.745Z</updated>
   <id>https://ai.xgoogle.xyz/</id>
   
   <author>
@@ -20,8 +20,8 @@
     <title>谷歌云Ubuntu18.04系统上安装配置Python 3.8</title>
     <link href="https://ai.xgoogle.xyz/archives/75c5c45.html"/>
     <id>https://ai.xgoogle.xyz/archives/75c5c45.html</id>
-    <published>2019-04-13T12:58:33.000Z</published>
-    <updated>2020-04-13T13:11:39.020Z</updated>
+    <published>2020-04-13T12:58:33.000Z</published>
+    <updated>2020-04-13T13:18:13.745Z</updated>
     
     <content type="html"><![CDATA[<p>本文介绍如何在Ubuntu18.04 LTS系统上安装最新版python3.8，并配置为默认的python版本。</p><p>目前python最新稳定版本是<a href="https://docs.python.org/release/3.8.2/whatsnew/changelog.html#python-3-8-2-final" target="_blank" rel="noopener">3.8.2</a>，发布于Feb. 24, 2020。一些ubuntu用户面临升级最新版python的问题，在他们系统中python默认的版本通常是 3.6.9。</p><a id="more"></a><h2 id="安装Python-3-8"><a href="#安装Python-3-8" class="headerlink" title="安装Python 3.8"></a>安装Python 3.8</h2><p>按照以下步骤安装并配置Python 3.8.</p><h3 id="1-在系统中更新仓库"><a href="#1-在系统中更新仓库" class="headerlink" title="1:在系统中更新仓库"></a>1:在系统中更新仓库</h3><p>之所以要更新仓库源，是因为Ubuntu的默认源不包含最新版的python，早期根本就没有Python 3.8的源，近期虽然支持了但不是最新版本，当前仅支持到3.8.0.</p><p>使用如下命令添加  <strong>deadsnakes</strong> 仓库源：</p><p><code>sudo add-apt-repository ppa:deadsnakes/ppa</code></p><p>更新包列表：</p><p><code>sudo apt-get update</code></p><p>验证下Python包更新是否正常：</p><p><code>apt list | grep python3.8</code></p><p><img src="img/image-20200411132640940.png" alt="image-20200411132640940"></p><p>从上面可以看出已经有了Python3.8.2的源。</p><h3 id="2-使用apt-get安装Python-3-8"><a href="#2-使用apt-get安装Python-3-8" class="headerlink" title="2:使用apt-get安装Python 3.8"></a>2:使用apt-get安装Python 3.8</h3><p>使用下面的命令进行安装：</p><p><code>sudo apt-get install python3.8</code></p><p><img src="img/image-20200411133139175.png" alt="image-20200411133139175"></p><h3 id="3-更新可选配置项里添加原来默认的Python-3-6和新安装的Python3-8"><a href="#3-更新可选配置项里添加原来默认的Python-3-6和新安装的Python3-8" class="headerlink" title="3:更新可选配置项里添加原来默认的Python 3.6和新安装的Python3.8"></a>3:更新可选配置项里添加原来默认的Python 3.6和新安装的Python3.8</h3><p>将新老两个版本的Python都添加到配置可选项里，确保以后可随时切换选择版本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1</span><br><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 2</span><br></pre></td></tr></table></figure><h3 id="4-更新python3命令使其指向新版本Python3-8"><a href="#4-更新python3命令使其指向新版本Python3-8" class="headerlink" title="4:更新python3命令使其指向新版本Python3.8"></a>4:更新python3命令使其指向新版本Python3.8</h3><p>默认情况下，python3是指向老版本Python3.6的，所以需要切换一下：</p><p><code>sudo update-alternatives --config python3</code></p><p><img src="img/image-20200411134513732.png" alt="image-20200411134513732"></p><p>如上，选择<strong>2</strong>来选中python3.8.</p><h3 id="5-最后测试下Python版本"><a href="#5-最后测试下Python版本" class="headerlink" title="5:最后测试下Python版本"></a>5:最后测试下Python版本</h3><p>使用命令：</p><p><code>python3 -V</code></p><p>得到下面的输出，即在使用Python3.8.</p><p><img src="img/image-20200411134959319.png" alt="image-20200411134959319"></p>]]></content>
     
