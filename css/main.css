@@ -1940,7 +1940,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #c6ff0a;
+  background: #be401c;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3367,12 +3367,12 @@ hr {
   margin-bottom: 60px;
 }
 .pagination {
-  margin: 80px 0 0;
+  margin: 40px 0 0;
   text-align: left;
 }
 @media (max-width: 900px) {
   .pagination {
-    margin: 40px 10px 0;
+    margin: 20px 10px 0;
     text-align: center;
   }
 }
