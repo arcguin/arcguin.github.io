@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[谷歌云Ubuntu18.04系统上安装配置Python 3.8]]></title>
+    <url>%2Farchives%2F75c5c45.html</url>
+    <content type="text"><![CDATA[本文介绍如何在Ubuntu18.04 LTS系统上安装最新版python3.8，并配置为默认的python版本。 目前python最新稳定版本是3.8.2，发布于Feb. 24, 2020。一些ubuntu用户面临升级最新版python的问题，在他们系统中python默认的版本通常是 3.6.9。 安装Python 3.8按照以下步骤安装并配置Python 3.8. 1:在系统中更新仓库之所以要更新仓库源，是因为Ubuntu的默认源不包含最新版的python，早期根本就没有Python 3.8的源，近期虽然支持了但不是最新版本，当前仅支持到3.8.0. 使用如下命令添加 deadsnakes 仓库源： sudo add-apt-repository ppa:deadsnakes/ppa 更新包列表： sudo apt-get update 验证下Python包更新是否正常： apt list | grep python3.8 从上面可以看出已经有了Python3.8.2的源。 2:使用apt-get安装Python 3.8使用下面的命令进行安装： sudo apt-get install python3.8 3:更新可选配置项里添加原来默认的Python 3.6和新安装的Python3.8将新老两个版本的Python都添加到配置可选项里，确保以后可随时切换选择版本： 12sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 2 4:更新python3命令使其指向新版本Python3.8默认情况下，python3是指向老版本Python3.6的，所以需要切换一下： sudo update-alternatives --config python3 如上，选择2来选中python3.8. 5:最后测试下Python版本使用命令： python3 -V 得到下面的输出，即在使用Python3.8.]]></content>
+      <categories>
+        <category>工具使用</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[机器学习训练数据集：经典MNIST和Fashion-MNIST数据集]]></title>
     <url>%2Farchives%2F6be60555.html</url>
     <content type="text"><![CDATA[引言 介绍机器学习领域两大训练数据集：MNIST和Fashion-MNIST，除了基本的简介外，还包括编程中(Python)如何加载引用这两大类数据。 经典MNIST数据集经典MNIST数据集包含了大量的手写数字，来自美国国家标准与技术研究所，由不同人手写的0至9的数字构成，由60000个训练样本集和10000个测试样本集构成，每个样本的尺寸为28x28，以二进制格式存储，如下图所示： 十几年来，来自机器学习、机器视觉、人工智能、深度学习领域的研究员们把这个数据集作为衡量算法的基准之一。你会在很多的会议，期刊的论文中发现这个数据集的身影。实际上，MNIST数据集已经成为算法作者的必测的数据集之一。有人曾调侃道：” 如果一个算法在MNIST不work, 那么它就根本没法用；而如果它在MNIST上work, 它在其他数据上也可能不work！” 数据的加载使用 sklearn 库的 datasets 来加载数据(更多datasets数据集说明)，matplotlib 作为可视化绘图工具。示例代码如下： 1234567891011121314from sklearn.datasets import fetch_openmlimport matplotlibimport matplotlib.pyplot as pltmnist = fetch_openml('mnist_784')mnist.keys()&gt;&gt;dict_keys(['data', 'target', 'feature_names', 'DESCR', 'details', 'categories', 'url'])digit = mnist.data[0]digit_image = digit.reshape(28, 28)plt.imshow(digit_image, cmap=matplotlib.cm.binary)plt.axis('off')plt.show() 验证图片对应的目标值： 12mnist.target[0]&gt;&gt;'5' Fashion-MNIST数据集Fashion-MNIST是一个替代经典MNIST手写数字集的图像数据集。 它是由Zalando（一家德国的时尚科技公司）旗下的研究部门提供。其涵盖了来自10种类别的共7万个不同商品的正面图片。Fashion-MNIST的大小、格式和训练集/测试集划分与原始的MNIST完全一致。60000/10000的训练测试数据划分，28x28的灰度图片。你可以直接用它来测试你的机器学习和深度学习算法性能，且不需要改动任何的代码。 这个数据集的样子大致如下（每个类别占三行）： 数据的加载Python 中示例代码如下： 12345678910111213from sklearn.datasets import fetch_openmlimport matplotlibimport matplotlib.pyplot as pltfashion_mnist = fetch_openml('Fashion-MNIST')fashion_mnist.keys()&gt;&gt;dict_keys(['data', 'target', 'feature_names', 'DESCR', 'details', 'categories', 'url'])fashion_image = fashion_mnist.data[1].reshape(28, 28)plt.imshow(fashion_image, cmap=matplotlib.cm.binary)plt.axis('off')plt.show() 打印的图片：]]></content>
