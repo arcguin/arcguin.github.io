@@ -1,357 +1,300 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>Jupyter Notebook修改起始目录配置，解决不生效问题</title>
-    <url>/archives/f6dd61e.html</url>
-    <content><![CDATA[<h4 id="具体方法"><a href="#具体方法" class="headerlink" title="具体方法"></a>具体方法</h4><ol>
-<li><p>Win键+R打开cmd命令行窗口，输入命令<code>jupyter notebook --generate-config</code>生成配置文件；</p>
-<p>此步的前提是系统环境变量已配置正确，否则可能会有“jupyter不是内部或外部命令，也不是可运行的程序或批处理文件”的错误提示。这时需更新系统环境变量，或者也可直接跳过，通过下面第2点的方法生成配置文件。</p>
-<a id="more"></a>
-</li>
-<li><p>使用Anaconda Prompt来创建配置文件，命令与第1点中的一样，也是<code>jupyter notebook --generate-config</code>，此环境下不存在找不到命令的异常。</p>
-</li>
-<li><p>默认情况下生成的配置文件路径为<code>C:\Users\用户名\.jupyter\jupyter_notebook_config.py</code></p>
-</li>
-<li><p>编辑上一步的配置文件</p>
-<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">The directory to use for notebooks and kernels.</span><br><span class="line"><span class="deletion">-#c.NotebookApp.notebook_dir = ''</span></span><br><span class="line"><span class="addition">+c.NotebookApp.notebook_dir = 'D:\\workspace\\Python\\notebook'</span></span><br></pre></td></tr></table></figure>
-
-<p>按上面添加指定的notebook工作目录。</p>
-</li>
-<li><p>在Anaconda Prompt中通过命令<code>jupyter notebook</code>启动，可以看到起始目录已经改成了我们自己设置的。</p>
-</li>
-<li><p>修改开始菜单中Jupyter Notebook的快捷方式：</p>
-<p>操作流程：程序→Anaconda→ Jupyter Notebook→ 右键→ 属性→ 快捷方式→ 去掉“目标”一项中后面的” %USERPROFILE%” 。</p>
-<p>此时再通过开始菜单中的快捷方式打开Notebook时，起始目录也已变成我们自己配置文件中设定的。</p>
-</li>
-</ol>
-]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>谷歌云Ubuntu18.04系统上安装配置Python 3.8</title>
+      <link href="/archives/75c5c45.html"/>
+      <url>/archives/75c5c45.html</url>
+      
+        <content type="html"><![CDATA[<p>本文介绍如何在Ubuntu18.04 LTS系统上安装最新版python3.8，并配置为默认的python版本。</p><p>目前python最新稳定版本是<a href="https://docs.python.org/release/3.8.2/whatsnew/changelog.html#python-3-8-2-final" target="_blank" rel="noopener">3.8.2</a>，发布于Feb. 24, 2020。一些ubuntu用户面临升级最新版python的问题，在他们系统中python默认的版本通常是 3.6.9。</p><a id="more"></a><h2 id="安装Python-3-8"><a href="#安装Python-3-8" class="headerlink" title="安装Python 3.8"></a>安装Python 3.8</h2><p>按照以下步骤安装并配置Python 3.8.</p><h3 id="1-在系统中更新仓库"><a href="#1-在系统中更新仓库" class="headerlink" title="1:在系统中更新仓库"></a>1:在系统中更新仓库</h3><p>之所以要更新仓库源，是因为Ubuntu的默认源不包含最新版的python，早期根本就没有Python 3.8的源，近期虽然支持了但不是最新版本，当前仅支持到3.8.0.</p><p>使用如下命令添加  <strong>deadsnakes</strong> 仓库源：</p><p><code>sudo add-apt-repository ppa:deadsnakes/ppa</code></p><p>更新包列表：</p><p><code>sudo apt-get update</code></p><p>验证下Python包更新是否正常：</p><p><code>apt list | grep python3.8</code></p><p><img src="img/image-20200411132640940.png" alt="image-20200411132640940"></p><p>从上面可以看出已经有了Python3.8.2的源。</p><h3 id="2-使用apt-get安装Python-3-8"><a href="#2-使用apt-get安装Python-3-8" class="headerlink" title="2:使用apt-get安装Python 3.8"></a>2:使用apt-get安装Python 3.8</h3><p>使用下面的命令进行安装：</p><p><code>sudo apt-get install python3.8</code></p><p><img src="img/image-20200411133139175.png" alt="image-20200411133139175"></p><h3 id="3-更新可选配置项里添加原来默认的Python-3-6和新安装的Python3-8"><a href="#3-更新可选配置项里添加原来默认的Python-3-6和新安装的Python3-8" class="headerlink" title="3:更新可选配置项里添加原来默认的Python 3.6和新安装的Python3.8"></a>3:更新可选配置项里添加原来默认的Python 3.6和新安装的Python3.8</h3><p>将新老两个版本的Python都添加到配置可选项里，确保以后可随时切换选择版本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1</span><br><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 2</span><br></pre></td></tr></table></figure><h3 id="4-更新python3命令使其指向新版本Python3-8"><a href="#4-更新python3命令使其指向新版本Python3-8" class="headerlink" title="4:更新python3命令使其指向新版本Python3.8"></a>4:更新python3命令使其指向新版本Python3.8</h3><p>默认情况下，python3是指向老版本Python3.6的，所以需要切换一下：</p><p><code>sudo update-alternatives --config python3</code></p><p><img src="img/image-20200411134513732.png" alt="image-20200411134513732"></p><p>如上，选择<strong>2</strong>来选中python3.8.</p><h3 id="5-最后测试下Python版本"><a href="#5-最后测试下Python版本" class="headerlink" title="5:最后测试下Python版本"></a>5:最后测试下Python版本</h3><p>使用命令：</p><p><code>python3 -V</code></p><p>得到下面的输出，即在使用Python3.8.</p><p><img src="img/image-20200411134959319.png" alt="image-20200411134959319"></p>]]></content>
+      
+      
       <categories>
-        <category>工具使用</category>
+          
+          <category> 工具使用 </category>
+          
       </categories>
-      <tags>
-        <tag>jupyter</tag>
-        <tag>notebook</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo博客中创建自定义html页面的方法</title>
-    <url>/archives/a71b4c60.html</url>
-    <content><![CDATA[<blockquote>
-<p>在Hexo博客中有时需要创建自定义的html页面，这时该如何实现？</p>
-</blockquote>
-<p>Hexo中我们使用的是markdown格式的文件，渲染出来的博客页面默认都是有主题样式的。如果不希望指定页面使用主题样式，只需在对应的md文件头部增加一个<code>layout: false</code>的配置即可。如下所示：</p>
-<a id="more"></a>
-
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">尝试创建自定义的html文件，不使用默认的主题样式</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="number">-08</span><span class="number">-27</span> <span class="number">23</span><span class="string">:25:24</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">综合</span></span><br><span class="line"><span class="attr">tags:</span> <span class="string">[综合]</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">layout:</span> <span class="literal">false</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-
-<p>这样博客生成的html文件就不会被主题所渲染。</p>
-<hr>
-<p>另外，在Hexo博客中，我们是可以直接创建html文件的，只不过默认生成时也是会被主题渲染，出来的页面还是会有主题样式。此时需用到另一种方法来屏蔽渲染。</p>
-<p><strong>使用<code>skip_render</code></strong></p>
-<p><code>skip_render</code> 的配置在 <strong>站点配置文件</strong> 中。</p>
-<p>只有 <code>source</code> 目录下的文件才会发布到 <code>public</code>（能够在网络上访问到），因此 Hexo 只渲染 <code>source</code> 目录下的文件。<code>skip_render</code> 参数设置的路径是相对于 <code>source</code> 目录的路径。比如:</p>
-<figure class="highlight avrasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">skip_render:</span> test.html</span><br></pre></td></tr></table></figure>
-
-<p>注意，千万不要写成<code>/test.html</code>，这里只能填相对于source文件夹的相对路径。</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>机器学习训练数据集：经典MNIST和Fashion-MNIST数据集</title>
+      <link href="/archives/6be60555.html"/>
+      <url>/archives/6be60555.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote><p>介绍机器学习领域两大训练数据集：MNIST和Fashion-MNIST，除了基本的简介外，还包括编程中(Python)如何加载引用这两大类数据。</p></blockquote><h3 id="经典MNIST数据集"><a href="#经典MNIST数据集" class="headerlink" title="经典MNIST数据集"></a>经典MNIST数据集</h3><p><a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">经典MNIST数据集</a>包含了大量的手写数字，来自美国国家标准与技术研究所，由不同人手写的0至9的数字构成，由60000个训练样本集和10000个测试样本集构成，每个样本的尺寸为28x28，以二进制格式存储，如下图所示：</p><a id="more"></a><p><img src="img/mnist.jpg" alt=""></p><p>十几年来，来自机器学习、机器视觉、人工智能、深度学习领域的研究员们把这个数据集作为衡量算法的基准之一。你会在很多的会议，期刊的论文中发现这个数据集的身影。实际上，MNIST数据集已经成为算法作者的必测的数据集之一。有人曾调侃道：” 如果一个算法在MNIST不work, 那么它就根本没法用；而如果它在MNIST上work, 它在其他数据上也可能不work！”</p><h4 id="数据的加载"><a href="#数据的加载" class="headerlink" title="数据的加载"></a>数据的加载</h4><p>使用 sklearn 库的 datasets 来加载数据(<a href="http://scikit-learn.org/stable/datasets/index.html" target="_blank" rel="noopener">更多datasets数据集说明</a>)，matplotlib 作为可视化绘图工具。示例代码如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_openml</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">mnist = fetch_openml(<span class="string">'mnist_784'</span>)</span><br><span class="line">mnist.keys()</span><br><span class="line">&gt;&gt;dict_keys([<span class="string">'data'</span>, <span class="string">'target'</span>, <span class="string">'feature_names'</span>, <span class="string">'DESCR'</span>, <span class="string">'details'</span>, <span class="string">'categories'</span>, <span class="string">'url'</span>])</span><br><span class="line"></span><br><span class="line">digit = mnist.data[<span class="number">0</span>]</span><br><span class="line">digit_image = digit.reshape(<span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"></span><br><span class="line">plt.imshow(digit_image, cmap=matplotlib.cm.binary)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure><p><img src="img/mnist-01.png" alt=""></p><p>验证图片对应的目标值：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mnist.target[<span class="number">0</span>]</span><br><span class="line">&gt;&gt;<span class="string">'5'</span></span><br></pre></td></tr></table></figure><h3 id="Fashion-MNIST数据集"><a href="#Fashion-MNIST数据集" class="headerlink" title="Fashion-MNIST数据集"></a>Fashion-MNIST数据集</h3><p><a href="https://github.com/zalandoresearch/fashion-mnist/blob/master/README.zh-CN.md" target="_blank" rel="noopener">Fashion-MNIST</a>是一个替代<a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">经典MNIST手写数字集</a>的图像数据集。 它是由Zalando（一家德国的时尚科技公司）旗下的<a href="https://research.zalando.com/" target="_blank" rel="noopener">研究部门</a>提供。其涵盖了来自10种类别的共7万个不同商品的正面图片。Fashion-MNIST的大小、格式和训练集/测试集划分与原始的MNIST完全一致。60000/10000的训练测试数据划分，28x28的灰度图片。你可以直接用它来测试你的机器学习和深度学习算法性能，且<strong>不需要</strong>改动任何的代码。</p><p>这个数据集的样子大致如下（每个类别占三行）：</p><p><img src="img/fashion-mnist-sprite.png" alt=""></p><h4 id="数据的加载-1"><a href="#数据的加载-1" class="headerlink" title="数据的加载"></a>数据的加载</h4><p>Python 中示例代码如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_openml</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">fashion_mnist = fetch_openml(<span class="string">'Fashion-MNIST'</span>)</span><br><span class="line">fashion_mnist.keys()</span><br><span class="line">&gt;&gt;dict_keys([<span class="string">'data'</span>, <span class="string">'target'</span>, <span class="string">'feature_names'</span>, <span class="string">'DESCR'</span>, <span class="string">'details'</span>, <span class="string">'categories'</span>, <span class="string">'url'</span>])</span><br><span class="line"></span><br><span class="line">fashion_image = fashion_mnist.data[<span class="number">1</span>].reshape(<span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"></span><br><span class="line">plt.imshow(fashion_image, cmap=matplotlib.cm.binary)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure><p>打印的图片：</p><p><img src="img/mnist-02.png" alt=""></p>]]></content>
+      
+      
       <categories>
-        <category>Hexo</category>
+          
+          <category> 机器学习 </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>谷歌云Ubuntu18.04系统上安装配置Python 3.8</title>
-    <url>/archives/75c5c45.html</url>
-    <content><![CDATA[<p>本文介绍如何在Ubuntu18.04 LTS系统上安装最新版python3.8，并配置为默认的python版本。</p>
-<p>目前python最新稳定版本是<a href="https://docs.python.org/release/3.8.2/whatsnew/changelog.html#python-3-8-2-final" target="_blank" rel="noopener">3.8.2</a>，发布于Feb. 24, 2020。一些ubuntu用户面临升级最新版python的问题，在他们系统中python默认的版本通常是 3.6.9。</p>
-<a id="more"></a>
-
-<h2 id="安装Python-3-8"><a href="#安装Python-3-8" class="headerlink" title="安装Python 3.8"></a>安装Python 3.8</h2><p>按照以下步骤安装并配置Python 3.8.</p>
-<h3 id="1-在系统中更新仓库"><a href="#1-在系统中更新仓库" class="headerlink" title="1:在系统中更新仓库"></a>1:在系统中更新仓库</h3><p>之所以要更新仓库源，是因为Ubuntu的默认源不包含最新版的python，早期根本就没有Python 3.8的源，近期虽然支持了但不是最新版本，当前仅支持到3.8.0.</p>
-<p>使用如下命令添加  <strong>deadsnakes</strong> 仓库源：</p>
-<p><code>sudo add-apt-repository ppa:deadsnakes/ppa</code></p>
-<p>更新包列表：</p>
-<p><code>sudo apt-get update</code></p>
-<p>验证下Python包更新是否正常：</p>
-<p><code>apt list | grep python3.8</code></p>
-<p><img src="img/image-20200411132640940.png" alt="image-20200411132640940"></p>
-<p>从上面可以看出已经有了Python3.8.2的源。</p>
-<h3 id="2-使用apt-get安装Python-3-8"><a href="#2-使用apt-get安装Python-3-8" class="headerlink" title="2:使用apt-get安装Python 3.8"></a>2:使用apt-get安装Python 3.8</h3><p>使用下面的命令进行安装：</p>
-<p><code>sudo apt-get install python3.8</code></p>
-<p><img src="img/image-20200411133139175.png" alt="image-20200411133139175"></p>
-<h3 id="3-更新可选配置项里添加原来默认的Python-3-6和新安装的Python3-8"><a href="#3-更新可选配置项里添加原来默认的Python-3-6和新安装的Python3-8" class="headerlink" title="3:更新可选配置项里添加原来默认的Python 3.6和新安装的Python3.8"></a>3:更新可选配置项里添加原来默认的Python 3.6和新安装的Python3.8</h3><p>将新老两个版本的Python都添加到配置可选项里，确保以后可随时切换选择版本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1</span><br><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 2</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-更新python3命令使其指向新版本Python3-8"><a href="#4-更新python3命令使其指向新版本Python3-8" class="headerlink" title="4:更新python3命令使其指向新版本Python3.8"></a>4:更新python3命令使其指向新版本Python3.8</h3><p>默认情况下，python3是指向老版本Python3.6的，所以需要切换一下：</p>
-<p><code>sudo update-alternatives --config python3</code></p>
-<p><img src="img/image-20200411134513732.png" alt="image-20200411134513732"></p>
-<p>如上，选择<strong>2</strong>来选中python3.8.</p>
-<h3 id="5-最后测试下Python版本"><a href="#5-最后测试下Python版本" class="headerlink" title="5:最后测试下Python版本"></a>5:最后测试下Python版本</h3><p>使用命令：</p>
-<p><code>python3 -V</code></p>
-<p>得到下面的输出，即在使用Python3.8.</p>
-<p><img src="img/image-20200411134959319.png" alt="image-20200411134959319"></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> mnist </tag>
+            
+            <tag> 数据集 </tag>
+            
+            <tag> sklearn </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo博客中创建自定义html页面的方法</title>
+      <link href="/archives/a71b4c60.html"/>
+      <url>/archives/a71b4c60.html</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>在Hexo博客中有时需要创建自定义的html页面，这时该如何实现？</p></blockquote><p>Hexo中我们使用的是markdown格式的文件，渲染出来的博客页面默认都是有主题样式的。如果不希望指定页面使用主题样式，只需在对应的md文件头部增加一个<code>layout: false</code>的配置即可。如下所示：</p><a id="more"></a><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">尝试创建自定义的html文件，不使用默认的主题样式</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="number">-08</span><span class="number">-27</span> <span class="number">23</span><span class="string">:25:24</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">综合</span></span><br><span class="line"><span class="attr">tags:</span> <span class="string">[综合]</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">layout:</span> <span class="literal">false</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure><p>这样博客生成的html文件就不会被主题所渲染。</p><hr><p>另外，在Hexo博客中，我们是可以直接创建html文件的，只不过默认生成时也是会被主题渲染，出来的页面还是会有主题样式。此时需用到另一种方法来屏蔽渲染。</p><p><strong>使用<code>skip_render</code></strong></p><p><code>skip_render</code> 的配置在 <strong>站点配置文件</strong> 中。</p><p>只有 <code>source</code> 目录下的文件才会发布到 <code>public</code>（能够在网络上访问到），因此 Hexo 只渲染 <code>source</code> 目录下的文件。<code>skip_render</code> 参数设置的路径是相对于 <code>source</code> 目录的路径。比如:</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">skip_render:</span> test.html</span><br></pre></td></tr></table></figure><p>注意，千万不要写成<code>/test.html</code>，这里只能填相对于source文件夹的相对路径。</p>]]></content>
+      
+      
       <categories>
-        <category>工具使用</category>
+          
+          <category> Hexo </category>
+          
       </categories>
-      <tags>
-        <tag>ubuntu</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>numpy.random模块基础用法</title>
-    <url>/archives/d8f75e23.html</url>
-    <content><![CDATA[<p><strong>库的导入</strong></p>
-<blockquote>
-<p>import numpy as np</p>
-</blockquote>
-<ol>
-<li><p>np.random.random() :随机生成[0,1)之间的浮点数，可选择参数size=()设置生成随机数的尺寸，默认为1</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.random(size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[ <span class="number">0.35396137</span>  <span class="number">0.21659113</span>  <span class="number">0.88348479</span>]</span><br><span class="line"> [ <span class="number">0.65330978</span>  <span class="number">0.23728751</span>  <span class="number">0.56109208</span>]]</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-</li>
-<li><p>np.random.rand():生成[0, 1)间随机数 ，和np.random.random相比，除了输入参数的格式不同，其他没啥区别</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=np.random.rand(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;[[ <span class="number">0.37399521</span>  <span class="number">0.48735693</span>  <span class="number">0.20704647</span>]</span><br><span class="line"> [ <span class="number">0.80814041</span>  <span class="number">0.31231348</span>  <span class="number">0.23810419</span>]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.randint(low, high=None, size=None, dtype=<strong>‘l’</strong>):产生随机整数[low,high)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.randint(<span class="number">0</span>,<span class="number">7</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) </span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">3</span> <span class="number">5</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line">a=np.random.randint(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) <span class="comment">#若只设置一个参数，则表示[0,low）</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">3</span> <span class="number">3</span>]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.random_integers(low, high=None, size=None)：取值范围：若high不为None，则取[low,high)之间随机整数，否则取[1,low)之间随机整数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.random_integers(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>))  <span class="comment">#此函数会报warnig, This function is deprecated</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">3</span> <span class="number">5</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">2</span> <span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.normal(loc=0.0, scale=1.0, size=None): 高斯分布随机数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.normal(loc=<span class="number">1</span>,scale=<span class="number">0.5</span>,size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">0.56762094</span> <span class="number">1.85984684</span> <span class="number">0.80333823</span>]</span><br><span class="line"> [<span class="number">1.27362216</span> <span class="number">1.24186823</span> <span class="number">1.09520804</span>]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.randn():标准正态分布随机数(和上面的区别在于这个函数的方差和均值为1和0，为固定值，上面那个normal函数的方差均值可改变)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.randn(<span class="number">2</span>,<span class="number">3</span>)  <span class="comment">#直接输入维数，不接受元组</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">-0.05165023</span> <span class="number">-0.33677039</span> <span class="number">-0.45092475</span>]</span><br><span class="line"> [ <span class="number">0.84170895</span>  <span class="number">2.50748773</span>  <span class="number">3.44787468</span>]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.uniform(low=0, high=1, size=None):  从一个均匀分布[low,high)中随机采样浮点数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.uniform(<span class="number">0</span>, <span class="number">100</span>, size=(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">91.76418491</span>, <span class="number">93.00838446</span>, <span class="number">89.42534774</span>],</span><br><span class="line"> [<span class="number">26.35315009</span>, <span class="number">49.92301921</span>, <span class="number">46.1115719</span> ]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.shuffle(): 将序列的所有元素随机排序 ，传入参数可以是一个序列或者元组</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=list(range(<span class="number">5</span>))</span><br><span class="line">print(x)</span><br><span class="line">np.random.shuffle(x)  <span class="comment">#对x自身进行修改</span></span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.choice():可以从序列(字符串、列表、元组等)中选取随机项,不过功能远不止这些</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=np.random.choice([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>])</span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;d</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> 博客 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>numpy.random模块基础用法</title>
+      <link href="/archives/d8f75e23.html"/>
+      <url>/archives/d8f75e23.html</url>
+      
+        <content type="html"><![CDATA[<p><strong>库的导入</strong></p><blockquote><p>import numpy as np</p></blockquote><ol><li><p>np.random.random() :随机生成[0,1)之间的浮点数，可选择参数size=()设置生成随机数的尺寸，默认为1</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.random(size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[ <span class="number">0.35396137</span>  <span class="number">0.21659113</span>  <span class="number">0.88348479</span>]</span><br><span class="line"> [ <span class="number">0.65330978</span>  <span class="number">0.23728751</span>  <span class="number">0.56109208</span>]]</span><br></pre></td></tr></table></figure><a id="more"></a></li><li><p>np.random.rand():生成[0, 1)间随机数 ，和np.random.random相比，除了输入参数的格式不同，其他没啥区别</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x=np.random.rand(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;[[ <span class="number">0.37399521</span>  <span class="number">0.48735693</span>  <span class="number">0.20704647</span>]</span><br><span class="line"> [ <span class="number">0.80814041</span>  <span class="number">0.31231348</span>  <span class="number">0.23810419</span>]]</span><br></pre></td></tr></table></figure></li><li><p>np.random.randint(low, high=None, size=None, dtype=<strong>‘l’</strong>):产生随机整数[low,high)</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.randint(<span class="number">0</span>,<span class="number">7</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) </span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">3</span> <span class="number">5</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line">a=np.random.randint(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) <span class="comment">#若只设置一个参数，则表示[0,low）</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">3</span> <span class="number">3</span>]]</span><br></pre></td></tr></table></figure></li><li><p>np.random.random_integers(low, high=None, size=None)：取值范围：若high不为None，则取[low,high)之间随机整数，否则取[1,low)之间随机整数</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.random_integers(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>))  <span class="comment">#此函数会报warnig, This function is deprecated</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">3</span> <span class="number">5</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">2</span> <span class="number">1</span>]]</span><br></pre></td></tr></table></figure></li><li><p>np.random.normal(loc=0.0, scale=1.0, size=None): 高斯分布随机数</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.normal(loc=<span class="number">1</span>,scale=<span class="number">0.5</span>,size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">0.56762094</span> <span class="number">1.85984684</span> <span class="number">0.80333823</span>]</span><br><span class="line"> [<span class="number">1.27362216</span> <span class="number">1.24186823</span> <span class="number">1.09520804</span>]]</span><br></pre></td></tr></table></figure></li><li><p>np.random.randn():标准正态分布随机数(和上面的区别在于这个函数的方差和均值为1和0，为固定值，上面那个normal函数的方差均值可改变)</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.randn(<span class="number">2</span>,<span class="number">3</span>)  <span class="comment">#直接输入维数，不接受元组</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">-0.05165023</span> <span class="number">-0.33677039</span> <span class="number">-0.45092475</span>]</span><br><span class="line"> [ <span class="number">0.84170895</span>  <span class="number">2.50748773</span>  <span class="number">3.44787468</span>]]</span><br></pre></td></tr></table></figure></li><li><p>np.random.uniform(low=0, high=1, size=None):  从一个均匀分布[low,high)中随机采样浮点数</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.uniform(<span class="number">0</span>, <span class="number">100</span>, size=(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">91.76418491</span>, <span class="number">93.00838446</span>, <span class="number">89.42534774</span>],</span><br><span class="line"> [<span class="number">26.35315009</span>, <span class="number">49.92301921</span>, <span class="number">46.1115719</span> ]]</span><br></pre></td></tr></table></figure></li><li><p>np.random.shuffle(): 将序列的所有元素随机排序 ，传入参数可以是一个序列或者元组</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x=list(range(<span class="number">5</span>))</span><br><span class="line">print(x)</span><br><span class="line">np.random.shuffle(x)  <span class="comment">#对x自身进行修改</span></span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure></li><li><p>np.random.choice():可以从序列(字符串、列表、元组等)中选取随机项,不过功能远不止这些</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=np.random.choice([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>])</span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;d</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+      
+      
       <categories>
-        <category>机器学习</category>
+          
+          <category> 机器学习 </category>
+          
       </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>numpy</tag>
-        <tag>random</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机器学习训练数据集：经典MNIST和Fashion-MNIST数据集</title>
-    <url>/archives/6be60555.html</url>
-    <content><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
-<p>介绍机器学习领域两大训练数据集：MNIST和Fashion-MNIST，除了基本的简介外，还包括编程中(Python)如何加载引用这两大类数据。</p>
-</blockquote>
-<h3 id="经典MNIST数据集"><a href="#经典MNIST数据集" class="headerlink" title="经典MNIST数据集"></a>经典MNIST数据集</h3><p><a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">经典MNIST数据集</a>包含了大量的手写数字，来自美国国家标准与技术研究所，由不同人手写的0至9的数字构成，由60000个训练样本集和10000个测试样本集构成，每个样本的尺寸为28x28，以二进制格式存储，如下图所示：</p>
-<a id="more"></a>
-
-<p><img src="img/mnist.jpg" alt=""></p>
-<p>十几年来，来自机器学习、机器视觉、人工智能、深度学习领域的研究员们把这个数据集作为衡量算法的基准之一。你会在很多的会议，期刊的论文中发现这个数据集的身影。实际上，MNIST数据集已经成为算法作者的必测的数据集之一。有人曾调侃道：” 如果一个算法在MNIST不work, 那么它就根本没法用；而如果它在MNIST上work, 它在其他数据上也可能不work！”</p>
-<h4 id="数据的加载"><a href="#数据的加载" class="headerlink" title="数据的加载"></a>数据的加载</h4><p>使用 sklearn 库的 datasets 来加载数据(<a href="http://scikit-learn.org/stable/datasets/index.html" target="_blank" rel="noopener">更多datasets数据集说明</a>)，matplotlib 作为可视化绘图工具。示例代码如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_openml</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">mnist = fetch_openml(<span class="string">'mnist_784'</span>)</span><br><span class="line">mnist.keys()</span><br><span class="line">&gt;&gt;dict_keys([<span class="string">'data'</span>, <span class="string">'target'</span>, <span class="string">'feature_names'</span>, <span class="string">'DESCR'</span>, <span class="string">'details'</span>, <span class="string">'categories'</span>, <span class="string">'url'</span>])</span><br><span class="line"></span><br><span class="line">digit = mnist.data[<span class="number">0</span>]</span><br><span class="line">digit_image = digit.reshape(<span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"></span><br><span class="line">plt.imshow(digit_image, cmap=matplotlib.cm.binary)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p><img src="img/mnist-01.png" alt=""></p>
-<p>验证图片对应的目标值：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mnist.target[<span class="number">0</span>]</span><br><span class="line">&gt;&gt;<span class="string">'5'</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Fashion-MNIST数据集"><a href="#Fashion-MNIST数据集" class="headerlink" title="Fashion-MNIST数据集"></a>Fashion-MNIST数据集</h3><p><a href="https://github.com/zalandoresearch/fashion-mnist/blob/master/README.zh-CN.md" target="_blank" rel="noopener">Fashion-MNIST</a>是一个替代<a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">经典MNIST手写数字集</a>的图像数据集。 它是由Zalando（一家德国的时尚科技公司）旗下的<a href="https://research.zalando.com/" target="_blank" rel="noopener">研究部门</a>提供。其涵盖了来自10种类别的共7万个不同商品的正面图片。Fashion-MNIST的大小、格式和训练集/测试集划分与原始的MNIST完全一致。60000/10000的训练测试数据划分，28x28的灰度图片。你可以直接用它来测试你的机器学习和深度学习算法性能，且<strong>不需要</strong>改动任何的代码。</p>
-<p>这个数据集的样子大致如下（每个类别占三行）：</p>
-<p><img src="img/fashion-mnist-sprite.png" alt=""></p>
-<h4 id="数据的加载-1"><a href="#数据的加载-1" class="headerlink" title="数据的加载"></a>数据的加载</h4><p>Python 中示例代码如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_openml</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">fashion_mnist = fetch_openml(<span class="string">'Fashion-MNIST'</span>)</span><br><span class="line">fashion_mnist.keys()</span><br><span class="line">&gt;&gt;dict_keys([<span class="string">'data'</span>, <span class="string">'target'</span>, <span class="string">'feature_names'</span>, <span class="string">'DESCR'</span>, <span class="string">'details'</span>, <span class="string">'categories'</span>, <span class="string">'url'</span>])</span><br><span class="line"></span><br><span class="line">fashion_image = fashion_mnist.data[<span class="number">1</span>].reshape(<span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line"></span><br><span class="line">plt.imshow(fashion_image, cmap=matplotlib.cm.binary)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>打印的图片：</p>
-<p><img src="img/mnist-02.png" alt=""></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> numpy </tag>
+            
+            <tag> random </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Jupyter Notebook修改起始目录配置，解决不生效问题</title>
+      <link href="/archives/f6dd61e.html"/>
+      <url>/archives/f6dd61e.html</url>
+      
+        <content type="html"><![CDATA[<h4 id="具体方法"><a href="#具体方法" class="headerlink" title="具体方法"></a>具体方法</h4><ol><li><p>Win键+R打开cmd命令行窗口，输入命令<code>jupyter notebook --generate-config</code>生成配置文件；</p><p>此步的前提是系统环境变量已配置正确，否则可能会有“jupyter不是内部或外部命令，也不是可运行的程序或批处理文件”的错误提示。这时需更新系统环境变量，或者也可直接跳过，通过下面第2点的方法生成配置文件。</p><a id="more"></a></li><li><p>使用Anaconda Prompt来创建配置文件，命令与第1点中的一样，也是<code>jupyter notebook --generate-config</code>，此环境下不存在找不到命令的异常。</p></li><li><p>默认情况下生成的配置文件路径为<code>C:\Users\用户名\.jupyter\jupyter_notebook_config.py</code></p></li><li><p>编辑上一步的配置文件</p><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The directory to use for notebooks and kernels.</span><br><span class="line"><span class="deletion">-#c.NotebookApp.notebook_dir = ''</span></span><br><span class="line"><span class="addition">+c.NotebookApp.notebook_dir = 'D:\\workspace\\Python\\notebook'</span></span><br></pre></td></tr></table></figure><p>按上面添加指定的notebook工作目录。</p></li><li><p>在Anaconda Prompt中通过命令<code>jupyter notebook</code>启动，可以看到起始目录已经改成了我们自己设置的。</p></li><li><p>修改开始菜单中Jupyter Notebook的快捷方式：</p><p>操作流程：程序→Anaconda→ Jupyter Notebook→ 右键→ 属性→ 快捷方式→ 去掉“目标”一项中后面的” %USERPROFILE%” 。</p><p>此时再通过开始菜单中的快捷方式打开Notebook时，起始目录也已变成我们自己配置文件中设定的。</p></li></ol>]]></content>
+      
+      
       <categories>
-        <category>机器学习</category>
+          
+          <category> 工具使用 </category>
+          
       </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>mnist</tag>
-        <tag>数据集</tag>
-        <tag>sklearn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo_Next主题博客接入Gitment实现评论功能</title>
-    <url>/archives/aa5c621a.html</url>
-    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p><a href="https://github.com/imsun/gitment" target="_blank" rel="noopener">Gitment</a>是作者实现的一款基于 GitHub Issues 的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的 Markdown / GFM 和代码高亮支持。尤为适合各种基于 GitHub Pages 的静态博客或项目页面。</p>
-<h4 id="接入过程"><a href="#接入过程" class="headerlink" title="接入过程"></a>接入过程</h4><h5 id="1、注册-OAuth-Application"><a href="#1、注册-OAuth-Application" class="headerlink" title="1、注册 OAuth Application"></a>1、注册 OAuth Application</h5><a id="more"></a>
-<p>通过注册地址<a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">https://github.com/settings/applications/new</a>进行注册，注册页面如下： </p>
-<p><img src="img/Reg_OAuth.PNG" alt="header"><br>注意<code>Authorization callback URL</code>填上自己网站首页url地址。<br>注册成功会得到一个 client ID 和一个 client secret，将用于以下的配置文件中。 </p>
-<h5 id="2、编辑主题配置文件-config-yml进行配置"><a href="#2、编辑主题配置文件-config-yml进行配置" class="headerlink" title="2、编辑主题配置文件_config.yml进行配置"></a>2、编辑主题配置文件_config.yml进行配置</h5><p>找到Gitment配置区域：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Gitment</span></span><br><span class="line"><span class="comment"># Introduction: https://imsun.net/posts/gitment-introduction/</span></span><br><span class="line"><span class="comment"># You can get your Github ID from https://api.github.com/users/&lt;Github username&gt;</span></span><br><span class="line"><span class="attr">gitment:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">mint:</span> <span class="literal">true</span> <span class="comment"># RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway</span></span><br><span class="line">  <span class="attr">count:</span> <span class="literal">true</span> <span class="comment"># Show comments count in post meta area</span></span><br><span class="line">  <span class="attr">lazy:</span> <span class="literal">false</span> <span class="comment"># Comments lazy loading with a button</span></span><br><span class="line">  <span class="attr">cleanly:</span> <span class="literal">true</span> <span class="comment"># Hide 'Powered by ...' on footer, and more</span></span><br><span class="line">  <span class="attr">language:</span> <span class="comment"># Force language, or auto switch by theme</span></span><br><span class="line">  <span class="attr">github_user:</span> <span class="string">yourname</span> <span class="comment"># MUST HAVE, Your Github ID</span></span><br><span class="line">  <span class="attr">github_repo:</span> <span class="string">yourname.github.io</span> <span class="comment"># MUST HAVE, The repo you use to store Gitment comments</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">d367821xxxxxxxxx</span> <span class="comment"># MUST HAVE, Github client id for the Gitment</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">02fcxxxxxxxxxxxxxx</span> <span class="comment"># EITHER this or proxy_gateway, Github access secret token for the Gitment</span></span><br><span class="line">  <span class="attr">proxy_gateway:</span> <span class="comment"># Address of api proxy, See: https://github.com/aimingoo/intersect</span></span><br><span class="line">  <span class="attr">redirect_protocol:</span> <span class="comment"># Protocol of redirect_uri with force_redirect_protocol when mint enabled</span></span><br></pre></td></tr></table></figure>
-<p>其中<code>github_user</code>为你的github用户名，<code>github_repo</code>一定要是仓库的名称，不要写成仓库地址，这里可以保持同github pages共用一个库，当然你也可以选择使用新建的仓库。<code>client_id</code>和<code>client_secret</code>就是上一步注册时得到的。</p>
-<h4 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h4><p>到此通过 hexo d 重新部署应该能看到博客文章页面下已出现Gitment评论区，不过可能存在一些问题。</p>
-<ul>
-<li>登录报错 “[object ProgressEvent]”<br><img src="img/ai_error.PNG" alt="header"><br><b>出错原因：</b>在原开发者版本中调用的js文件里，有访问gitment作者的服务器代码，而作者的服务器不好使了。具体调用的js文件可以在主题第三方插件目录下看到，打开<code>\themes\next\layout\_third-party\comments\gitment.swig</code>文件，定位到如下部分:<figure class="highlight twig"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!-- LOCAL: You can save these files to your site and update links --&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">if</span></span> theme.gitment.mint %&#125;</span></span><br><span class="line"><span class="xml">        </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">set</span></span> CommentsClass = "Gitmint" %&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://aimingoo.github.io/gitmint/style/default.css"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name">else</span> %&#125;</span></span><br><span class="line"><span class="xml">        </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">set</span></span> CommentsClass = "Gitment" %&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://imsun.github.io/gitment/style/default.css"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://imsun.github.io/gitment/dist/gitment.browser.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">endif</span></span> %&#125;</span></span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- END LOCAL --&gt;</span></span></span><br></pre></td></tr></table></figure>
-可以看到<code>gitment.browser.js</code>是原作中使用的js文件，该文件中会调用作者的服务器接口‘<a href="https://gh-oauth.imsun.net’，该接口可能已无法访问，所以我们需要自己来实现接口代替。" target="_blank" rel="noopener">https://gh-oauth.imsun.net’，该接口可能已无法访问，所以我们需要自己来实现接口代替。</a><br><b>解决方法：</b>自己的服务器中创建实现类似作者定义的接口。</li>
-<li>在自己的服务器中clone原作者使用的源文件：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/imsun/gh-oauth-server.git</span><br></pre></td></tr></table></figure></li>
-<li>进入项目目录，下载依赖并启动服务：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install &amp;&amp; nohup npm start &amp;</span><br></pre></td></tr></table></figure>
-如果服务运行成功，会在项目目录下的nohup.out文件的结尾提示正在监听3000端口，接着使用nginx搭配https反向代理转发服务器本地3000端口。这样就可以使用自己的服务器网址替换前面提到的作者的接口。</li>
-<li>我已将前面的gitment.swig文件里引用的两个js文件均作了接口替换，同时保存在了我的Hexo博客目录下，所以现在来替换swig文件中的js引用地址：<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">&lt;!-- LOCAL: You can save these files to your site and update links --&gt;</span><br><span class="line">    &#123;% if theme.gitment.mint %&#125;</span><br><span class="line">        &#123;% set CommentsClass = "Gitmint" %&#125;</span><br><span class="line">        &lt;link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css"&gt;</span><br><span class="line"><span class="deletion">-        &lt;script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="addition">+        &lt;script src="https://ai.xgoogle.xyz/js/src/gitmint.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &#123;% else %&#125;</span><br><span class="line">        &#123;% set CommentsClass = "Gitment" %&#125;</span><br><span class="line">        &lt;link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"&gt;</span><br><span class="line"><span class="deletion">-        &lt;script src="https://imsun.github.io/gitment/dist/gitment.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="addition">+        &lt;script src="https://ai.xgoogle.xyz/js/src/gitment.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">&lt;!-- END LOCAL --&gt;</span><br></pre></td></tr></table></figure>
-理论上你只需将gitment.swig文件按上面这样修改后，即可在博客中正常使用Gitment评论功能了。</li>
-</ul>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> jupyter </tag>
+            
+            <tag> notebook </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux重启后自动执行指定脚本功能</title>
+      <link href="/archives/5f78267c.html"/>
+      <url>/archives/5f78267c.html</url>
+      
+        <content type="html"><![CDATA[<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p><b>通过<code>crontab</code>定时任务实现</b></p><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>crontab -e</span><br></pre></td></tr></table></figure><ul><li><p>假设需要每次重启后自动执行script脚本：/home/vivek/bin/installnetkit.sh，则只需在crontab中添加如下这一行：</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@reboot</span> <span class="regexp">/home/</span>vivek<span class="regexp">/bin/</span>installnetkit.sh</span><br></pre></td></tr></table></figure></li><li><p>当然有些脚本或命令是需要在机器重启后过指定时间后再执行,可以通过下面命令实现重启+5分钟后执行指定脚本：</p><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">@reboot</span> <span class="built_in">sleep</span> <span class="number">300</span> &amp;&amp; /home/wwwjobs/clean-<span class="keyword">static</span>-cache.sh</span><br></pre></td></tr></table></figure></li><li><p>定时重启设备：</p></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">58 3 * * 0 date&gt;&gt;cronlog</span><br><span class="line">0 4 * * 0 /sbin/reboot</span><br></pre></td></tr></table></figure><p>如上两条语句实现每周日3:58分保存当时的时间到/root/cronlog文件中，随后在4:00重启机器。 </p><p>如果想每天执行一次重启，只需这样：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">58 3 * * * date&gt;&gt;cronlog</span><br><span class="line">0 4 * * * /sbin/reboot</span><br></pre></td></tr></table></figure><p>每两天执行一次：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">58 3 */2 * * date&gt;&gt;cronlog</span><br><span class="line">0 4 */2 * * /sbin/reboot</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>Hexo</category>
+          
+          <category> Linux </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>博客</tag>
-        <tag>gitment</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo博客文章链接持久化方法</title>
-    <url>/archives/52ccf080.html</url>
-    <content><![CDATA[<h4 id="持久化解决方案"><a href="#持久化解决方案" class="headerlink" title="持久化解决方案"></a>持久化解决方案</h4><h5 id="安装hexo-abbrlink插件"><a href="#安装hexo-abbrlink插件" class="headerlink" title="安装hexo-abbrlink插件"></a>安装hexo-abbrlink插件</h5><p>安装使用<q>hexo-abbrlink插件</q>，自动根据文章时间点生成最终博客文章链接，后期不管怎么修改文章永久链接都不会再变。同时文章链接层级更短，使得博客文章更利于SEO。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h5 id="配置文件修改"><a href="#配置文件修改" class="headerlink" title="配置文件修改"></a>配置文件修改</h5><p>站点配置文件_config.yml中相应位置按如下修改：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">permalink: archives/:abbrlink.html</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32  <span class="comment"># 算法：crc16(default) and crc32</span></span><br><span class="line">  rep: hex    <span class="comment"># 进制：dec(default) and hex</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h5><p>博客文章链接地址最终呈现效果：<br><q><a href="https://yoursite.com/archives/201d9ace.html" target="_blank" rel="noopener">https://yoursite.com/archives/201d9ace.html</a></q></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> shell </tag>
+            
+            <tag> 脚本 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo_Next主题博客接入Gitment实现评论功能</title>
+      <link href="/archives/aa5c621a.html"/>
+      <url>/archives/aa5c621a.html</url>
+      
+        <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p><a href="https://github.com/imsun/gitment" target="_blank" rel="noopener">Gitment</a>是作者实现的一款基于 GitHub Issues 的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的 Markdown / GFM 和代码高亮支持。尤为适合各种基于 GitHub Pages 的静态博客或项目页面。</p><h4 id="接入过程"><a href="#接入过程" class="headerlink" title="接入过程"></a>接入过程</h4><h5 id="1、注册-OAuth-Application"><a href="#1、注册-OAuth-Application" class="headerlink" title="1、注册 OAuth Application"></a>1、注册 OAuth Application</h5><a id="more"></a><p>通过注册地址<a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">https://github.com/settings/applications/new</a>进行注册，注册页面如下： </p><p><img src="img/Reg_OAuth.PNG" alt="header"><br>注意<code>Authorization callback URL</code>填上自己网站首页url地址。<br>注册成功会得到一个 client ID 和一个 client secret，将用于以下的配置文件中。 </p><h5 id="2、编辑主题配置文件-config-yml进行配置"><a href="#2、编辑主题配置文件-config-yml进行配置" class="headerlink" title="2、编辑主题配置文件_config.yml进行配置"></a>2、编辑主题配置文件_config.yml进行配置</h5><p>找到Gitment配置区域：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gitment</span></span><br><span class="line"><span class="comment"># Introduction: https://imsun.net/posts/gitment-introduction/</span></span><br><span class="line"><span class="comment"># You can get your Github ID from https://api.github.com/users/&lt;Github username&gt;</span></span><br><span class="line"><span class="attr">gitment:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">mint:</span> <span class="literal">true</span> <span class="comment"># RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway</span></span><br><span class="line">  <span class="attr">count:</span> <span class="literal">true</span> <span class="comment"># Show comments count in post meta area</span></span><br><span class="line">  <span class="attr">lazy:</span> <span class="literal">false</span> <span class="comment"># Comments lazy loading with a button</span></span><br><span class="line">  <span class="attr">cleanly:</span> <span class="literal">true</span> <span class="comment"># Hide 'Powered by ...' on footer, and more</span></span><br><span class="line">  <span class="attr">language:</span> <span class="comment"># Force language, or auto switch by theme</span></span><br><span class="line">  <span class="attr">github_user:</span> <span class="string">yourname</span> <span class="comment"># MUST HAVE, Your Github ID</span></span><br><span class="line">  <span class="attr">github_repo:</span> <span class="string">yourname.github.io</span> <span class="comment"># MUST HAVE, The repo you use to store Gitment comments</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">d367821xxxxxxxxx</span> <span class="comment"># MUST HAVE, Github client id for the Gitment</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">02fcxxxxxxxxxxxxxx</span> <span class="comment"># EITHER this or proxy_gateway, Github access secret token for the Gitment</span></span><br><span class="line">  <span class="attr">proxy_gateway:</span> <span class="comment"># Address of api proxy, See: https://github.com/aimingoo/intersect</span></span><br><span class="line">  <span class="attr">redirect_protocol:</span> <span class="comment"># Protocol of redirect_uri with force_redirect_protocol when mint enabled</span></span><br></pre></td></tr></table></figure><p>其中<code>github_user</code>为你的github用户名，<code>github_repo</code>一定要是仓库的名称，不要写成仓库地址，这里可以保持同github pages共用一个库，当然你也可以选择使用新建的仓库。<code>client_id</code>和<code>client_secret</code>就是上一步注册时得到的。</p><h4 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h4><p>到此通过 hexo d 重新部署应该能看到博客文章页面下已出现Gitment评论区，不过可能存在一些问题。</p><ul><li>登录报错 “[object ProgressEvent]”<br><img src="img/ai_error.PNG" alt="header"><br><b>出错原因：</b>在原开发者版本中调用的js文件里，有访问gitment作者的服务器代码，而作者的服务器不好使了。具体调用的js文件可以在主题第三方插件目录下看到，打开<code>\themes\next\layout\_third-party\comments\gitment.swig</code>文件，定位到如下部分:<figure class="highlight twig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!-- LOCAL: You can save these files to your site and update links --&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">if</span></span> theme.gitment.mint %&#125;</span></span><br><span class="line"><span class="xml">        </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">set</span></span> CommentsClass = "Gitmint" %&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://aimingoo.github.io/gitmint/style/default.css"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name">else</span> %&#125;</span></span><br><span class="line"><span class="xml">        </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">set</span></span> CommentsClass = "Gitment" %&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://imsun.github.io/gitment/style/default.css"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://imsun.github.io/gitment/dist/gitment.browser.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">endif</span></span> %&#125;</span></span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- END LOCAL --&gt;</span></span></span><br></pre></td></tr></table></figure>可以看到<code>gitment.browser.js</code>是原作中使用的js文件，该文件中会调用作者的服务器接口‘<a href="https://gh-oauth.imsun.net’，该接口可能已无法访问，所以我们需要自己来实现接口代替。" target="_blank" rel="noopener">https://gh-oauth.imsun.net’，该接口可能已无法访问，所以我们需要自己来实现接口代替。</a><br><b>解决方法：</b>自己的服务器中创建实现类似作者定义的接口。</li><li>在自己的服务器中clone原作者使用的源文件：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/imsun/gh-oauth-server.git</span><br></pre></td></tr></table></figure></li><li>进入项目目录，下载依赖并启动服务：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install &amp;&amp; nohup npm start &amp;</span><br></pre></td></tr></table></figure>如果服务运行成功，会在项目目录下的nohup.out文件的结尾提示正在监听3000端口，接着使用nginx搭配https反向代理转发服务器本地3000端口。这样就可以使用自己的服务器网址替换前面提到的作者的接口。</li><li>我已将前面的gitment.swig文件里引用的两个js文件均作了接口替换，同时保存在了我的Hexo博客目录下，所以现在来替换swig文件中的js引用地址：<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- LOCAL: You can save these files to your site and update links --&gt;</span><br><span class="line">    &#123;% if theme.gitment.mint %&#125;</span><br><span class="line">        &#123;% set CommentsClass = "Gitmint" %&#125;</span><br><span class="line">        &lt;link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css"&gt;</span><br><span class="line"><span class="deletion">-        &lt;script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="addition">+        &lt;script src="https://ai.xgoogle.xyz/js/src/gitmint.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &#123;% else %&#125;</span><br><span class="line">        &#123;% set CommentsClass = "Gitment" %&#125;</span><br><span class="line">        &lt;link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"&gt;</span><br><span class="line"><span class="deletion">-        &lt;script src="https://imsun.github.io/gitment/dist/gitment.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="addition">+        &lt;script src="https://ai.xgoogle.xyz/js/src/gitment.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">&lt;!-- END LOCAL --&gt;</span><br></pre></td></tr></table></figure>理论上你只需将gitment.swig文件按上面这样修改后，即可在博客中正常使用Gitment评论功能了。</li></ul>]]></content>
+      
+      
       <categories>
-        <category>Hexo</category>
+          
+          <category> Hexo </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo_Next主题博客页面显示效果优化</title>
-    <url>/archives/3e4c942.html</url>
-    <content><![CDATA[<h5 id="调整页面显示内容宽度"><a href="#调整页面显示内容宽度" class="headerlink" title="调整页面显示内容宽度"></a>调整页面显示内容宽度</h5><p>原主题页面两侧留白太多就显得没有必要，并且不美观，所以有必要调整一下宽度。</p>
-<ul>
-<li>编辑 <code>/themes/next/source/css/_common/components/post/post-expand.styl</code> 文件，找到如下位置：  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@media (max-width: 767px)</span><br><span class="line">改为：</span><br><span class="line">@media (max-width: 1060px)</span><br></pre></td></tr></table></figure>
-<a id="more"></a></li>
-<li>编辑 <code>/themes/next/source/css/_variables/base.styl</code> 文件，找到如下位置：  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$main</span>-desktop                   = 960px</span><br><span class="line"><span class="variable">$main</span>-desktop-large             = 1200px</span><br><span class="line"><span class="variable">$content</span>-desktop                = 700px</span><br><span class="line">改为：</span><br><span class="line"><span class="variable">$main</span>-desktop                   = 1060px</span><br><span class="line"><span class="variable">$main</span>-desktop-large             = 1200px</span><br><span class="line"><span class="variable">$content</span>-desktop                = 800px</span><br></pre></td></tr></table></figure>
-<h5 id="调整文章正文顶部与标题行间距"><a href="#调整文章正文顶部与标题行间距" class="headerlink" title="调整文章正文顶部与标题行间距"></a>调整文章正文顶部与标题行间距</h5></li>
-<li>编辑 <code>/themes/next/source/css/_custom/custom.styl</code> 文件，添加如下内容：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.posts-expand .post-meta &#123;</span><br><span class="line">	margin: 10px 0 10px 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="调整博客首页每篇文章之间的间距"><a href="#调整博客首页每篇文章之间的间距" class="headerlink" title="调整博客首页每篇文章之间的间距"></a>调整博客首页每篇文章之间的间距</h5>对于主题样式Mist，博客文章列表之间间距过大，整体显示效果较差，考虑调小文章间距。</li>
-<li>编辑 <code>/themes/next/source/css/_schemes/Mist/_posts-expanded.styl</code>文件，找到如下位置：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">.posts-expand &#123;</span><br><span class="line">  padding-top: 0;</span><br><span class="line"></span><br><span class="line">  .post-title,</span><br><span class="line">  .post-meta &#123;</span><br><span class="line">    text-align: <span class="variable">$site</span>-meta-text-align;</span><br><span class="line">    +<span class="function"><span class="title">mobile</span></span>() &#123; text-align: center; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  .post-eof &#123; display: none; &#125;</span><br><span class="line"></span><br><span class="line">  .post &#123; margin-top: 120px; &#125;</span><br><span class="line">  .post:first-child &#123; margin-top: 0; &#125;</span><br><span class="line"></span><br><span class="line">  .post-meta &#123;</span><br><span class="line">    margin-top: 5px;</span><br><span class="line">    margin-bottom: 20px;</span><br><span class="line">  &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-修改该部分跟间距相关的两行代码：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">  .post &#123; margin-top: 120px; &#125;</span><br><span class="line">  .post:first-child &#123; margin-top: 0; &#125;</span><br><span class="line">改为：</span><br><span class="line">  .post &#123; </span><br><span class="line">    margin-top: 20px; </span><br><span class="line">    margin-bottom: 30px; </span><br><span class="line">    padding-top: 10px;</span><br><span class="line">    padding-right: 25px;</span><br><span class="line">    padding-bottom: 10px;</span><br><span class="line">    padding-left: 25px;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .post:first-child &#123; margin-top: 0; &#125;</span><br></pre></td></tr></table></figure>
-其中的第二句意为取消第一个文章的上边距，这里可以保持默认不作修改。</li>
-<li>文章列表整体的外边距也可以调整，具体文件为 <code>/themes/next/source/css/_schemes/Mist/outline/outline.styl</code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.main-inner &#123; margin-top: 80px; &#125;</span><br></pre></td></tr></table></figure>
-该文件只有一行，可将边距数值适当改小，比如50px。<h5 id="添加背景图片"><a href="#添加背景图片" class="headerlink" title="添加背景图片"></a>添加背景图片</h5></li>
-<li>在 <code>/themes/next/source/css/_custom/custom.styl</code>文件中添加一句：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">body &#123; background:url(/images/background.png); &#125;</span><br></pre></td></tr></table></figure>
-当然需将相应的背景图片文件(background.png)放到相应的目录下。<br>由于Next主题文章页面背景默认都是透明的，所以背景图片添加后会透到文章显示中来，如此会影响文章页面阅读体验。为了改进，需同样在custom.styl文件下添加如下内容：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.post &#123;</span><br><span class="line">     background: <span class="comment">#fff;</span></span><br><span class="line">     opacity: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-如此就可以将文章页面的背景设置为全白显示，同时完全不透明，从而不受添加的背景图片影响。<h5 id="查看效果"><a href="#查看效果" class="headerlink" title="查看效果"></a>查看效果</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo d --g</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> 博客 </tag>
+            
+            <tag> gitment </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo_Next主题博客页面显示效果优化</title>
+      <link href="/archives/3e4c942.html"/>
+      <url>/archives/3e4c942.html</url>
+      
+        <content type="html"><![CDATA[<h5 id="调整页面显示内容宽度"><a href="#调整页面显示内容宽度" class="headerlink" title="调整页面显示内容宽度"></a>调整页面显示内容宽度</h5><p>原主题页面两侧留白太多就显得没有必要，并且不美观，所以有必要调整一下宽度。</p><ul><li>编辑 <code>/themes/next/source/css/_common/components/post/post-expand.styl</code> 文件，找到如下位置：  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@media (max-width: 767px)</span><br><span class="line">改为：</span><br><span class="line">@media (max-width: 1060px)</span><br></pre></td></tr></table></figure><a id="more"></a></li><li>编辑 <code>/themes/next/source/css/_variables/base.styl</code> 文件，找到如下位置：  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$main</span>-desktop                   = 960px</span><br><span class="line"><span class="variable">$main</span>-desktop-large             = 1200px</span><br><span class="line"><span class="variable">$content</span>-desktop                = 700px</span><br><span class="line">改为：</span><br><span class="line"><span class="variable">$main</span>-desktop                   = 1060px</span><br><span class="line"><span class="variable">$main</span>-desktop-large             = 1200px</span><br><span class="line"><span class="variable">$content</span>-desktop                = 800px</span><br></pre></td></tr></table></figure><h5 id="调整文章正文顶部与标题行间距"><a href="#调整文章正文顶部与标题行间距" class="headerlink" title="调整文章正文顶部与标题行间距"></a>调整文章正文顶部与标题行间距</h5></li><li>编辑 <code>/themes/next/source/css/_custom/custom.styl</code> 文件，添加如下内容：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.posts-expand .post-meta &#123;</span><br><span class="line">margin: 10px 0 10px 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="调整博客首页每篇文章之间的间距"><a href="#调整博客首页每篇文章之间的间距" class="headerlink" title="调整博客首页每篇文章之间的间距"></a>调整博客首页每篇文章之间的间距</h5>对于主题样式Mist，博客文章列表之间间距过大，整体显示效果较差，考虑调小文章间距。</li><li>编辑 <code>/themes/next/source/css/_schemes/Mist/_posts-expanded.styl</code>文件，找到如下位置：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">.posts-expand &#123;</span><br><span class="line">  padding-top: 0;</span><br><span class="line"></span><br><span class="line">  .post-title,</span><br><span class="line">  .post-meta &#123;</span><br><span class="line">    text-align: <span class="variable">$site</span>-meta-text-align;</span><br><span class="line">    +<span class="function"><span class="title">mobile</span></span>() &#123; text-align: center; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  .post-eof &#123; display: none; &#125;</span><br><span class="line"></span><br><span class="line">  .post &#123; margin-top: 120px; &#125;</span><br><span class="line">  .post:first-child &#123; margin-top: 0; &#125;</span><br><span class="line"></span><br><span class="line">  .post-meta &#123;</span><br><span class="line">    margin-top: 5px;</span><br><span class="line">    margin-bottom: 20px;</span><br><span class="line">  &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>修改该部分跟间距相关的两行代码：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  .post &#123; margin-top: 120px; &#125;</span><br><span class="line">  .post:first-child &#123; margin-top: 0; &#125;</span><br><span class="line">改为：</span><br><span class="line">  .post &#123; </span><br><span class="line">    margin-top: 20px; </span><br><span class="line">    margin-bottom: 30px; </span><br><span class="line">    padding-top: 10px;</span><br><span class="line">    padding-right: 25px;</span><br><span class="line">    padding-bottom: 10px;</span><br><span class="line">    padding-left: 25px;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .post:first-child &#123; margin-top: 0; &#125;</span><br></pre></td></tr></table></figure>其中的第二句意为取消第一个文章的上边距，这里可以保持默认不作修改。</li><li>文章列表整体的外边距也可以调整，具体文件为 <code>/themes/next/source/css/_schemes/Mist/outline/outline.styl</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.main-inner &#123; margin-top: 80px; &#125;</span><br></pre></td></tr></table></figure>该文件只有一行，可将边距数值适当改小，比如50px。<h5 id="添加背景图片"><a href="#添加背景图片" class="headerlink" title="添加背景图片"></a>添加背景图片</h5></li><li>在 <code>/themes/next/source/css/_custom/custom.styl</code>文件中添加一句：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">body &#123; background:url(/images/background.png); &#125;</span><br></pre></td></tr></table></figure>当然需将相应的背景图片文件(background.png)放到相应的目录下。<br>由于Next主题文章页面背景默认都是透明的，所以背景图片添加后会透到文章显示中来，如此会影响文章页面阅读体验。为了改进，需同样在custom.styl文件下添加如下内容：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.post &#123;</span><br><span class="line">     background: <span class="comment">#fff;</span></span><br><span class="line">     opacity: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>如此就可以将文章页面的背景设置为全白显示，同时完全不透明，从而不受添加的背景图片影响。<h5 id="查看效果"><a href="#查看效果" class="headerlink" title="查看效果"></a>查看效果</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d --g</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+      
+      
       <categories>
-        <category>Hexo</category>
+          
+          <category> Hexo </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>博客</tag>
-        <tag>Next</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/archives/4a17b156.html</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Linux重启后自动执行指定脚本功能</title>
-    <url>/archives/5f78267c.html</url>
-    <content><![CDATA[<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p><b>通过<code>crontab</code>定时任务实现</b></p>
-<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>crontab -e</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>假设需要每次重启后自动执行script脚本：/home/vivek/bin/installnetkit.sh，则只需在crontab中添加如下这一行：</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="meta">@reboot</span> <span class="regexp">/home/</span>vivek<span class="regexp">/bin/</span>installnetkit.sh</span><br></pre></td></tr></table></figure></li>
-<li><p>当然有些脚本或命令是需要在机器重启后过指定时间后再执行,可以通过下面命令实现重启+5分钟后执行指定脚本：</p>
-<figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line"><span class="symbol">@reboot</span> <span class="built_in">sleep</span> <span class="number">300</span> &amp;&amp; /home/wwwjobs/clean-<span class="keyword">static</span>-cache.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>定时重启设备：</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">58 3 * * 0 date&gt;&gt;cronlog</span><br><span class="line">0 4 * * 0 /sbin/reboot</span><br></pre></td></tr></table></figure>
-
-<p>如上两条语句实现每周日3:58分保存当时的时间到/root/cronlog文件中，随后在4:00重启机器。 </p>
-<p>如果想每天执行一次重启，只需这样：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">58 3 * * * date&gt;&gt;cronlog</span><br><span class="line">0 4 * * * /sbin/reboot</span><br></pre></td></tr></table></figure>
-
-<p>每两天执行一次：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">58 3 */2 * * date&gt;&gt;cronlog</span><br><span class="line">0 4 */2 * * /sbin/reboot</span><br></pre></td></tr></table></figure>
-
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> 博客 </tag>
+            
+            <tag> Next </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo博客文章链接持久化方法</title>
+      <link href="/archives/52ccf080.html"/>
+      <url>/archives/52ccf080.html</url>
+      
+        <content type="html"><![CDATA[<h4 id="持久化解决方案"><a href="#持久化解决方案" class="headerlink" title="持久化解决方案"></a>持久化解决方案</h4><h5 id="安装hexo-abbrlink插件"><a href="#安装hexo-abbrlink插件" class="headerlink" title="安装hexo-abbrlink插件"></a>安装hexo-abbrlink插件</h5><p>安装使用<q>hexo-abbrlink插件</q>，自动根据文章时间点生成最终博客文章链接，后期不管怎么修改文章永久链接都不会再变。同时文章链接层级更短，使得博客文章更利于SEO。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure><a id="more"></a><h5 id="配置文件修改"><a href="#配置文件修改" class="headerlink" title="配置文件修改"></a>配置文件修改</h5><p>站点配置文件_config.yml中相应位置按如下修改：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">permalink: archives/:abbrlink.html</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32  <span class="comment"># 算法：crc16(default) and crc32</span></span><br><span class="line">  rep: hex    <span class="comment"># 进制：dec(default) and hex</span></span><br></pre></td></tr></table></figure><h5 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h5><p>博客文章链接地址最终呈现效果：<br><q><a href="https://yoursite.com/archives/201d9ace.html" target="_blank" rel="noopener">https://yoursite.com/archives/201d9ace.html</a></q></p>]]></content>
+      
+      
       <categories>
-        <category>Linux</category>
+          
+          <category> Hexo </category>
+          
       </categories>
-      <tags>
-        <tag>shell</tag>
-        <tag>脚本</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Hexo博客编辑发布文章</title>
-    <url>/archives/409d1dce.html</url>
-    <content><![CDATA[<h4 id="1、新建一篇文章"><a href="#1、新建一篇文章" class="headerlink" title="1、新建一篇文章"></a>1、新建一篇文章</h4><p>(1) 在Hexo博客根目录下，进入Git Bash命令窗口中，输入以下命令：  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"新文章标题"</span></span><br></pre></td></tr></table></figure>
-
-<p>(2) 在博客目录下/source/_posts文件夹下，可以看到已经生成相应的博客文件：“新文章标题.md”</p>
-<p>(3) 在该md文件中编辑博客内容。<br>注意：Hexo发布的文章是Markdown格式，Markdown基本语法可参考：<a href="http://www.markdown.cn/" target="_blank" rel="noopener">md基本语法</a>  </p>
-<a id="more"></a>
-
-<h4 id="2、给文章添加分类和标签"><a href="#2、给文章添加分类和标签" class="headerlink" title="2、给文章添加分类和标签"></a>2、给文章添加分类和标签</h4><p>(1) 在md文件中设置categories和tags属性：  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">title: 在这里</span><br><span class="line">date: 2018-08-02 11:41:10</span><br><span class="line">categories: web前端</span><br><span class="line">tags:</span><br><span class="line">- 博客     //多个标签可以这样添加</span><br><span class="line">- hexo</span><br></pre></td></tr></table></figure>
-
-<h4 id="3、启动服务器，本地测试"><a href="#3、启动服务器，本地测试" class="headerlink" title="3、启动服务器，本地测试"></a>3、启动服务器，本地测试</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-
-<h4 id="4、添加“阅读全文”按钮"><a href="#4、添加“阅读全文”按钮" class="headerlink" title="4、添加“阅读全文”按钮"></a>4、添加“阅读全文”按钮</h4><p>在文章中任意想添加的位置添加：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5、在博客中添加图片"><a href="#5、在博客中添加图片" class="headerlink" title="5、在博客中添加图片"></a>5、在博客中添加图片</h4><p>(1) 在hexo目录下安装插件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
-
-<p>(2) 在hexo\source 目录下新建一个img文件夹，把图片放置在里面；<br>(3) 在xxx.md中引用图片：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">![header]( img/header.jpg)</span><br></pre></td></tr></table></figure>
-
-<h4 id="6、发布到Github上"><a href="#6、发布到Github上" class="headerlink" title="6、发布到Github上"></a>6、发布到Github上</h4><p>(1) 发表的文章在本地预览无误后，在 Git Bash 命令窗口执行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-<p>(2) 在浏览器，访问自己的博客域名，即可看到刚 发布的文章。</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> 博客 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用Hexo博客编辑发布文章</title>
+      <link href="/archives/409d1dce.html"/>
+      <url>/archives/409d1dce.html</url>
+      
+        <content type="html"><![CDATA[<h4 id="1、新建一篇文章"><a href="#1、新建一篇文章" class="headerlink" title="1、新建一篇文章"></a>1、新建一篇文章</h4><p>(1) 在Hexo博客根目录下，进入Git Bash命令窗口中，输入以下命令：  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"新文章标题"</span></span><br></pre></td></tr></table></figure><p>(2) 在博客目录下/source/_posts文件夹下，可以看到已经生成相应的博客文件：“新文章标题.md”</p><p>(3) 在该md文件中编辑博客内容。<br>注意：Hexo发布的文章是Markdown格式，Markdown基本语法可参考：<a href="http://www.markdown.cn/" target="_blank" rel="noopener">md基本语法</a>  </p><a id="more"></a><h4 id="2、给文章添加分类和标签"><a href="#2、给文章添加分类和标签" class="headerlink" title="2、给文章添加分类和标签"></a>2、给文章添加分类和标签</h4><p>(1) 在md文件中设置categories和tags属性：  </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: 在这里</span><br><span class="line">date: 2018-08-02 11:41:10</span><br><span class="line">categories: web前端</span><br><span class="line">tags:</span><br><span class="line">- 博客     //多个标签可以这样添加</span><br><span class="line">- hexo</span><br></pre></td></tr></table></figure><h4 id="3、启动服务器，本地测试"><a href="#3、启动服务器，本地测试" class="headerlink" title="3、启动服务器，本地测试"></a>3、启动服务器，本地测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure><h4 id="4、添加“阅读全文”按钮"><a href="#4、添加“阅读全文”按钮" class="headerlink" title="4、添加“阅读全文”按钮"></a>4、添加“阅读全文”按钮</h4><p>在文章中任意想添加的位置添加：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure><h4 id="5、在博客中添加图片"><a href="#5、在博客中添加图片" class="headerlink" title="5、在博客中添加图片"></a>5、在博客中添加图片</h4><p>(1) 在hexo目录下安装插件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure><p>(2) 在hexo\source 目录下新建一个img文件夹，把图片放置在里面；<br>(3) 在xxx.md中引用图片：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![header]( img/header.jpg)</span><br></pre></td></tr></table></figure><h4 id="6、发布到Github上"><a href="#6、发布到Github上" class="headerlink" title="6、发布到Github上"></a>6、发布到Github上</h4><p>(1) 发表的文章在本地预览无误后，在 Git Bash 命令窗口执行以下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure><p>(2) 在浏览器，访问自己的博客域名，即可看到刚 发布的文章。</p>]]></content>
+      
+      
       <categories>
-        <category>Hexo</category>
+          
+          <category> Hexo </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>博客</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> 博客 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/archives/4a17b156.html"/>
+      <url>/archives/4a17b156.html</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><a id="more"></a><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
 </search>
