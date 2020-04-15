@@ -36,9 +36,9 @@
       <category term="工具使用" scheme="https://ai.xgoogle.xyz/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
     
     
-      <category term="ubuntu" scheme="https://ai.xgoogle.xyz/tags/ubuntu/"/>
-    
       <category term="python" scheme="https://ai.xgoogle.xyz/tags/python/"/>
+    
+      <category term="ubuntu" scheme="https://ai.xgoogle.xyz/tags/ubuntu/"/>
     
   </entry>
   
@@ -127,11 +127,11 @@
       <category term="机器学习" scheme="https://ai.xgoogle.xyz/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="python" scheme="https://ai.xgoogle.xyz/tags/python/"/>
-    
       <category term="numpy" scheme="https://ai.xgoogle.xyz/tags/numpy/"/>
     
       <category term="random" scheme="https://ai.xgoogle.xyz/tags/random/"/>
+    
+      <category term="python" scheme="https://ai.xgoogle.xyz/tags/python/"/>
     
   </entry>
   
