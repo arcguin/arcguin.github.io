@@ -36,9 +36,37 @@
       <category term="工具使用" scheme="https://ai.xgoogle.xyz/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
     
     
+      <category term="ubuntu" scheme="https://ai.xgoogle.xyz/tags/ubuntu/"/>
+    
       <category term="python" scheme="https://ai.xgoogle.xyz/tags/python/"/>
     
-      <category term="ubuntu" scheme="https://ai.xgoogle.xyz/tags/ubuntu/"/>
+  </entry>
+  
+  <entry>
+    <title>Hexo博客版本升级操作步骤</title>
+    <link href="https://ai.xgoogle.xyz/archives/b3bac378.html"/>
+    <id>https://ai.xgoogle.xyz/archives/b3bac378.html</id>
+    <published>2019-04-20T01:47:44.000Z</published>
+    <updated>2020-04-20T01:58:05.537Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="升级步骤"><a href="#升级步骤" class="headerlink" title="升级步骤"></a>升级步骤</h3><p>1、全局升级hexo-cli前，先<code>hexo -V</code>查看当前版本，然后`npm i hexo-cli -g；</p><p>2、使用<code>npm install -g npm-check</code>和<code>npm-check</code>，检查系统中的插件是否有需要升级的，同时可以看到当前都安装了哪些插件；</p><p>3、使用<code>npm install -g npm-upgrade</code>和<code>npm-upgrade</code>，升级系统中的插件；</p><p>4、使用<code>npm update -g</code>和<code>npm update --save</code>，进行更新；</p><p>5、使用<code>hexo -V</code>查看版本号是否已更新。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;升级步骤&quot;&gt;&lt;a href=&quot;#升级步骤&quot; class=&quot;headerlink&quot; title=&quot;升级步骤&quot;&gt;&lt;/a&gt;升级步骤&lt;/h3&gt;&lt;p&gt;1、全局升级hexo-cli前，先&lt;code&gt;hexo -V&lt;/code&gt;查看当前版本，然后`npm i hexo-cli 
+      
+    
+    </summary>
+    
+    
+      <category term="Hexo" scheme="https://ai.xgoogle.xyz/categories/Hexo/"/>
+    
+    
+      <category term="hexo" scheme="https://ai.xgoogle.xyz/tags/hexo/"/>
+    
+      <category term="博客" scheme="https://ai.xgoogle.xyz/tags/%E5%8D%9A%E5%AE%A2/"/>
     
   </entry>
   
@@ -127,11 +155,11 @@
       <category term="机器学习" scheme="https://ai.xgoogle.xyz/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
+      <category term="python" scheme="https://ai.xgoogle.xyz/tags/python/"/>
+    
       <category term="numpy" scheme="https://ai.xgoogle.xyz/tags/numpy/"/>
     
       <category term="random" scheme="https://ai.xgoogle.xyz/tags/random/"/>
-    
-      <category term="python" scheme="https://ai.xgoogle.xyz/tags/python/"/>
     
   </entry>
   
