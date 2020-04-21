@@ -43,6 +43,31 @@
   </entry>
   
   <entry>
+    <title>Hexo博客源码托管到私人仓库进行备份</title>
+    <link href="https://ai.xgoogle.xyz/archives/dc32fcc.html"/>
+    <id>https://ai.xgoogle.xyz/archives/dc32fcc.html</id>
+    <published>2019-05-21T08:50:31.000Z</published>
+    <updated>2020-04-21T09:39:52.847Z</updated>
+    
+    <content type="html"><![CDATA[<p>关于Hexo博客的备份与同步，通常的方案是在同一仓库下使用两个分支来实现：master分支-保存Hexo生成的博客文件；hexo分支-保存Hexo的源码文件。这种实现方式的弊端是Hexo源文件完全暴露在公开的仓库中，对于博客可能会用到的比如<code>leancloud阅读次数管理</code>、<code>多说评论</code>等服务的私有<strong>secret key</strong>来说是一安全隐患。所以本文采用新建私人仓库来备份托管Hexo源文件。</p><a id="more"></a><h3 id="创建私有仓库"><a href="#创建私有仓库" class="headerlink" title="创建私有仓库"></a>创建私有仓库</h3><p>在github上创建私人仓库，记下仓库地址，例如：</p><p><code>git@github.com:username/hexo-blog.git</code></p><h3 id="建立本地git仓库"><a href="#建立本地git仓库" class="headerlink" title="建立本地git仓库"></a>建立本地git仓库</h3><p>在自己电脑上进入Hexo博客所在目录，删除第三方主题的git配置，比如<code>next</code>主题：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ./themes/next/.git</span><br></pre></td></tr></table></figure><p>初始化本地git仓库：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure><p>创建一个<code>.gitignore</code>文件，并放在Hexo博客的根目录，内容如下：</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">.DS_Store</span></span><br><span class="line">Thumbs<span class="number">.</span><span class="built_in">db</span></span><br><span class="line"><span class="built_in">db</span><span class="number">.</span>json</span><br><span class="line">*.log</span><br><span class="line">node_modules/</span><br><span class="line"><span class="meta">public</span>/</span><br><span class="line"><span class="meta">.deploy</span>*/</span><br></pre></td></tr></table></figure><h3 id="push到私有仓库"><a href="#push到私有仓库" class="headerlink" title="push到私有仓库"></a>push到私有仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:username/hexo-blog.git</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"Hexo博客源码首次托管到私人仓库进行备份"</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure><p>至此就完成了本地Hexo源码的全部备份。</p><h3 id="在新电脑上同步Hexo博客"><a href="#在新电脑上同步Hexo博客" class="headerlink" title="在新电脑上同步Hexo博客"></a>在新电脑上同步Hexo博客</h3><p>Hexo拉取：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:username/hexo-blog.git</span><br></pre></td></tr></table></figure><p>这样在本地就有了备份的Hexo博客源文件。</p><h3 id="新电脑上发布博客"><a href="#新电脑上发布博客" class="headerlink" title="新电脑上发布博客"></a>新电脑上发布博客</h3><p>尽管本地已拉取了博客源文件，为了发布博客还需要建立一下Hexo的环境，这里需要格外注意的一点是：<br>千万不要用<code>hexo init</code>命令。原因是当前目录已经建立了git仓库环境, <code>hexo init</code>会覆盖到当前的git环境，重建一个新的，这样和我们的私有Hexo源码仓库脱离了联系。</p><p><strong>正确做法是：</strong></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure><p>因为<code>package.json</code>里面已经保存了<code>hexo</code>的必备资源包信息，<code>npm install</code>后Hexo环境就建立起来了。</p><p>接下来就可以正常的编写和发布博客了。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo s<span class="comment"># 本地预览</span></span><br><span class="line">hexo d --g<span class="comment"># 博客发布</span></span><br></pre></td></tr></table></figure><p>最后执行<code>git status</code>把更改的新文件<code>git add</code>和<code>git commit</code>，最后<code>git push origin master</code>到私有仓库，又会完成Hexo源码仓库的同步。</p><h3 id="Hexo仓库更新"><a href="#Hexo仓库更新" class="headerlink" title="Hexo仓库更新"></a>Hexo仓库更新</h3><p>下次进行Hexo仓库拉取时执行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all <span class="comment"># 将git上所有文件拉取到本地</span></span><br><span class="line">git reset --hard origin/master  <span class="comment"># 强制将本地内容指向刚刚同步git云端内容</span></span><br></pre></td></tr></table></figure><p>reset 对所拉取的文件不做任何处理，此处不用 pull 是因为本地尚有许多文件，使用 pull 会有一些版本冲突，解决起来也麻烦，而本地的文件都是初始化生成的文件，较拉取的库里面的文件而言基本无用，所以直接丢弃。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;关于Hexo博客的备份与同步，通常的方案是在同一仓库下使用两个分支来实现：master分支-保存Hexo生成的博客文件；hexo分支-保存Hexo的源码文件。这种实现方式的弊端是Hexo源文件完全暴露在公开的仓库中，对于博客可能会用到的比如&lt;code&gt;leancloud阅读次数管理&lt;/code&gt;、&lt;code&gt;多说评论&lt;/code&gt;等服务的私有&lt;strong&gt;secret key&lt;/strong&gt;来说是一安全隐患。所以本文采用新建私人仓库来备份托管Hexo源文件。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Hexo" scheme="https://ai.xgoogle.xyz/categories/Hexo/"/>
+    
+    
+      <category term="hexo" scheme="https://ai.xgoogle.xyz/tags/hexo/"/>
+    
+      <category term="博客" scheme="https://ai.xgoogle.xyz/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hexo博客版本升级操作步骤</title>
     <link href="https://ai.xgoogle.xyz/archives/b3bac378.html"/>
     <id>https://ai.xgoogle.xyz/archives/b3bac378.html</id>

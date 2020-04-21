@@ -1,53 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>numpy.random模块基础用法</title>
-    <url>/archives/d8f75e23.html</url>
-    <content><![CDATA[<p><strong>库的导入</strong></p>
-<blockquote>
-<p>import numpy as np</p>
-</blockquote>
-<ol>
-<li><p>np.random.random() :随机生成[0,1)之间的浮点数，可选择参数size=()设置生成随机数的尺寸，默认为1</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.random(size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[ <span class="number">0.35396137</span>  <span class="number">0.21659113</span>  <span class="number">0.88348479</span>]</span><br><span class="line"> [ <span class="number">0.65330978</span>  <span class="number">0.23728751</span>  <span class="number">0.56109208</span>]]</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-</li>
-<li><p>np.random.rand():生成[0, 1)间随机数 ，和np.random.random相比，除了输入参数的格式不同，其他没啥区别</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=np.random.rand(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;[[ <span class="number">0.37399521</span>  <span class="number">0.48735693</span>  <span class="number">0.20704647</span>]</span><br><span class="line"> [ <span class="number">0.80814041</span>  <span class="number">0.31231348</span>  <span class="number">0.23810419</span>]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.randint(low, high=None, size=None, dtype=<strong>‘l’</strong>):产生随机整数[low,high)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.randint(<span class="number">0</span>,<span class="number">7</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) </span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">3</span> <span class="number">5</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line">a=np.random.randint(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) <span class="comment">#若只设置一个参数，则表示[0,low）</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">3</span> <span class="number">3</span>]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.random_integers(low, high=None, size=None)：取值范围：若high不为None，则取[low,high)之间随机整数，否则取[1,low)之间随机整数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.random_integers(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>))  <span class="comment">#此函数会报warnig, This function is deprecated</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">3</span> <span class="number">5</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">2</span> <span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.normal(loc=0.0, scale=1.0, size=None): 高斯分布随机数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.normal(loc=<span class="number">1</span>,scale=<span class="number">0.5</span>,size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">0.56762094</span> <span class="number">1.85984684</span> <span class="number">0.80333823</span>]</span><br><span class="line"> [<span class="number">1.27362216</span> <span class="number">1.24186823</span> <span class="number">1.09520804</span>]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.randn():标准正态分布随机数(和上面的区别在于这个函数的方差和均值为1和0，为固定值，上面那个normal函数的方差均值可改变)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.randn(<span class="number">2</span>,<span class="number">3</span>)  <span class="comment">#直接输入维数，不接受元组</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">-0.05165023</span> <span class="number">-0.33677039</span> <span class="number">-0.45092475</span>]</span><br><span class="line"> [ <span class="number">0.84170895</span>  <span class="number">2.50748773</span>  <span class="number">3.44787468</span>]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.uniform(low=0, high=1, size=None):  从一个均匀分布[low,high)中随机采样浮点数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.uniform(<span class="number">0</span>, <span class="number">100</span>, size=(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">91.76418491</span>, <span class="number">93.00838446</span>, <span class="number">89.42534774</span>],</span><br><span class="line"> [<span class="number">26.35315009</span>, <span class="number">49.92301921</span>, <span class="number">46.1115719</span> ]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.shuffle(): 将序列的所有元素随机排序 ，传入参数可以是一个序列或者元组</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=list(range(<span class="number">5</span>))</span><br><span class="line">print(x)</span><br><span class="line">np.random.shuffle(x)  <span class="comment">#对x自身进行修改</span></span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>np.random.choice():可以从序列(字符串、列表、元组等)中选取随机项,不过功能远不止这些</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=np.random.choice([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>])</span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;d</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>numpy</tag>
-        <tag>random</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Jupyter Notebook修改起始目录配置，解决不生效问题</title>
     <url>/archives/f6dd61e.html</url>
     <content><![CDATA[<h4 id="具体方法"><a href="#具体方法" class="headerlink" title="具体方法"></a>具体方法</h4><ol>
@@ -110,43 +63,50 @@
       </tags>
   </entry>
   <entry>
-    <title>谷歌云Ubuntu18.04系统上安装配置Python 3.8</title>
-    <url>/archives/75c5c45.html</url>
-    <content><![CDATA[<p>本文介绍如何在Ubuntu18.04 LTS系统上安装最新版python3.8，并配置为默认的python版本。</p>
-<p>目前python最新稳定版本是<a href="https://docs.python.org/release/3.8.2/whatsnew/changelog.html#python-3-8-2-final" target="_blank" rel="noopener">3.8.2</a>，发布于Feb. 24, 2020。一些ubuntu用户面临升级最新版python的问题，在他们系统中python默认的版本通常是 3.6.9。</p>
+    <title>numpy.random模块基础用法</title>
+    <url>/archives/d8f75e23.html</url>
+    <content><![CDATA[<p><strong>库的导入</strong></p>
+<blockquote>
+<p>import numpy as np</p>
+</blockquote>
+<ol>
+<li><p>np.random.random() :随机生成[0,1)之间的浮点数，可选择参数size=()设置生成随机数的尺寸，默认为1</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.random(size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[ <span class="number">0.35396137</span>  <span class="number">0.21659113</span>  <span class="number">0.88348479</span>]</span><br><span class="line"> [ <span class="number">0.65330978</span>  <span class="number">0.23728751</span>  <span class="number">0.56109208</span>]]</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
-
-<h2 id="安装Python-3-8"><a href="#安装Python-3-8" class="headerlink" title="安装Python 3.8"></a>安装Python 3.8</h2><p>按照以下步骤安装并配置Python 3.8.</p>
-<h3 id="1-在系统中更新仓库"><a href="#1-在系统中更新仓库" class="headerlink" title="1:在系统中更新仓库"></a>1:在系统中更新仓库</h3><p>之所以要更新仓库源，是因为Ubuntu的默认源不包含最新版的python，早期根本就没有Python 3.8的源，近期虽然支持了但不是最新版本，当前仅支持到3.8.0.</p>
-<p>使用如下命令添加  <strong>deadsnakes</strong> 仓库源：</p>
-<p><code>sudo add-apt-repository ppa:deadsnakes/ppa</code></p>
-<p>更新包列表：</p>
-<p><code>sudo apt-get update</code></p>
-<p>验证下Python包更新是否正常：</p>
-<p><code>apt list | grep python3.8</code></p>
-<p><img src="img/image-20200411132640940.png" alt="image-20200411132640940"></p>
-<p>从上面可以看出已经有了Python3.8.2的源。</p>
-<h3 id="2-使用apt-get安装Python-3-8"><a href="#2-使用apt-get安装Python-3-8" class="headerlink" title="2:使用apt-get安装Python 3.8"></a>2:使用apt-get安装Python 3.8</h3><p>使用下面的命令进行安装：</p>
-<p><code>sudo apt-get install python3.8</code></p>
-<p><img src="img/image-20200411133139175.png" alt="image-20200411133139175"></p>
-<h3 id="3-更新可选配置项里添加原来默认的Python-3-6和新安装的Python3-8"><a href="#3-更新可选配置项里添加原来默认的Python-3-6和新安装的Python3-8" class="headerlink" title="3:更新可选配置项里添加原来默认的Python 3.6和新安装的Python3.8"></a>3:更新可选配置项里添加原来默认的Python 3.6和新安装的Python3.8</h3><p>将新老两个版本的Python都添加到配置可选项里，确保以后可随时切换选择版本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1</span><br><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 2</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-更新python3命令使其指向新版本Python3-8"><a href="#4-更新python3命令使其指向新版本Python3-8" class="headerlink" title="4:更新python3命令使其指向新版本Python3.8"></a>4:更新python3命令使其指向新版本Python3.8</h3><p>默认情况下，python3是指向老版本Python3.6的，所以需要切换一下：</p>
-<p><code>sudo update-alternatives --config python3</code></p>
-<p><img src="img/image-20200411134513732.png" alt="image-20200411134513732"></p>
-<p>如上，选择<strong>2</strong>来选中python3.8.</p>
-<h3 id="5-最后测试下Python版本"><a href="#5-最后测试下Python版本" class="headerlink" title="5:最后测试下Python版本"></a>5:最后测试下Python版本</h3><p>使用命令：</p>
-<p><code>python3 -V</code></p>
-<p>得到下面的输出，即在使用Python3.8.</p>
-<p><img src="img/image-20200411134959319.png" alt="image-20200411134959319"></p>
+</li>
+<li><p>np.random.rand():生成[0, 1)间随机数 ，和np.random.random相比，除了输入参数的格式不同，其他没啥区别</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=np.random.rand(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;[[ <span class="number">0.37399521</span>  <span class="number">0.48735693</span>  <span class="number">0.20704647</span>]</span><br><span class="line"> [ <span class="number">0.80814041</span>  <span class="number">0.31231348</span>  <span class="number">0.23810419</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.randint(low, high=None, size=None, dtype=<strong>‘l’</strong>):产生随机整数[low,high)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.randint(<span class="number">0</span>,<span class="number">7</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) </span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">3</span> <span class="number">5</span> <span class="number">1</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line">a=np.random.randint(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>)) <span class="comment">#若只设置一个参数，则表示[0,low）</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">2</span> <span class="number">4</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">3</span> <span class="number">3</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.random_integers(low, high=None, size=None)：取值范围：若high不为None，则取[low,high)之间随机整数，否则取[1,low)之间随机整数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.random_integers(<span class="number">5</span>,size=(<span class="number">2</span>,<span class="number">3</span>))  <span class="comment">#此函数会报warnig, This function is deprecated</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">1</span> <span class="number">3</span> <span class="number">5</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">2</span> <span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.normal(loc=0.0, scale=1.0, size=None): 高斯分布随机数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.normal(loc=<span class="number">1</span>,scale=<span class="number">0.5</span>,size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">0.56762094</span> <span class="number">1.85984684</span> <span class="number">0.80333823</span>]</span><br><span class="line"> [<span class="number">1.27362216</span> <span class="number">1.24186823</span> <span class="number">1.09520804</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.randn():标准正态分布随机数(和上面的区别在于这个函数的方差和均值为1和0，为固定值，上面那个normal函数的方差均值可改变)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.randn(<span class="number">2</span>,<span class="number">3</span>)  <span class="comment">#直接输入维数，不接受元组</span></span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">-0.05165023</span> <span class="number">-0.33677039</span> <span class="number">-0.45092475</span>]</span><br><span class="line"> [ <span class="number">0.84170895</span>  <span class="number">2.50748773</span>  <span class="number">3.44787468</span>]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.uniform(low=0, high=1, size=None):  从一个均匀分布[low,high)中随机采样浮点数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=np.random.uniform(<span class="number">0</span>, <span class="number">100</span>, size=(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">print(a)</span><br><span class="line">&gt;&gt;[[<span class="number">91.76418491</span>, <span class="number">93.00838446</span>, <span class="number">89.42534774</span>],</span><br><span class="line"> [<span class="number">26.35315009</span>, <span class="number">49.92301921</span>, <span class="number">46.1115719</span> ]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.shuffle(): 将序列的所有元素随机排序 ，传入参数可以是一个序列或者元组</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=list(range(<span class="number">5</span>))</span><br><span class="line">print(x)</span><br><span class="line">np.random.shuffle(x)  <span class="comment">#对x自身进行修改</span></span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">&gt;&gt;[<span class="number">0</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>np.random.choice():可以从序列(字符串、列表、元组等)中选取随机项,不过功能远不止这些</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=np.random.choice([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>])</span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;d</span><br></pre></td></tr></table></figure></li>
+</ol>
 ]]></content>
       <categories>
-        <category>工具使用</category>
+        <category>机器学习</category>
       </categories>
       <tags>
+        <tag>numpy</tag>
+        <tag>random</tag>
         <tag>python</tag>
-        <tag>ubuntu</tag>
       </tags>
   </entry>
   <entry>
@@ -187,6 +147,46 @@
       </tags>
   </entry>
   <entry>
+    <title>谷歌云Ubuntu18.04系统上安装配置Python 3.8</title>
+    <url>/archives/75c5c45.html</url>
+    <content><![CDATA[<p>本文介绍如何在Ubuntu18.04 LTS系统上安装最新版python3.8，并配置为默认的python版本。</p>
+<p>目前python最新稳定版本是<a href="https://docs.python.org/release/3.8.2/whatsnew/changelog.html#python-3-8-2-final" target="_blank" rel="noopener">3.8.2</a>，发布于Feb. 24, 2020。一些ubuntu用户面临升级最新版python的问题，在他们系统中python默认的版本通常是 3.6.9。</p>
+<a id="more"></a>
+
+<h2 id="安装Python-3-8"><a href="#安装Python-3-8" class="headerlink" title="安装Python 3.8"></a>安装Python 3.8</h2><p>按照以下步骤安装并配置Python 3.8.</p>
+<h3 id="1-在系统中更新仓库"><a href="#1-在系统中更新仓库" class="headerlink" title="1:在系统中更新仓库"></a>1:在系统中更新仓库</h3><p>之所以要更新仓库源，是因为Ubuntu的默认源不包含最新版的python，早期根本就没有Python 3.8的源，近期虽然支持了但不是最新版本，当前仅支持到3.8.0.</p>
+<p>使用如下命令添加  <strong>deadsnakes</strong> 仓库源：</p>
+<p><code>sudo add-apt-repository ppa:deadsnakes/ppa</code></p>
+<p>更新包列表：</p>
+<p><code>sudo apt-get update</code></p>
+<p>验证下Python包更新是否正常：</p>
+<p><code>apt list | grep python3.8</code></p>
+<p><img src="img/image-20200411132640940.png" alt="image-20200411132640940"></p>
+<p>从上面可以看出已经有了Python3.8.2的源。</p>
+<h3 id="2-使用apt-get安装Python-3-8"><a href="#2-使用apt-get安装Python-3-8" class="headerlink" title="2:使用apt-get安装Python 3.8"></a>2:使用apt-get安装Python 3.8</h3><p>使用下面的命令进行安装：</p>
+<p><code>sudo apt-get install python3.8</code></p>
+<p><img src="img/image-20200411133139175.png" alt="image-20200411133139175"></p>
+<h3 id="3-更新可选配置项里添加原来默认的Python-3-6和新安装的Python3-8"><a href="#3-更新可选配置项里添加原来默认的Python-3-6和新安装的Python3-8" class="headerlink" title="3:更新可选配置项里添加原来默认的Python 3.6和新安装的Python3.8"></a>3:更新可选配置项里添加原来默认的Python 3.6和新安装的Python3.8</h3><p>将新老两个版本的Python都添加到配置可选项里，确保以后可随时切换选择版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1</span><br><span class="line">sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-更新python3命令使其指向新版本Python3-8"><a href="#4-更新python3命令使其指向新版本Python3-8" class="headerlink" title="4:更新python3命令使其指向新版本Python3.8"></a>4:更新python3命令使其指向新版本Python3.8</h3><p>默认情况下，python3是指向老版本Python3.6的，所以需要切换一下：</p>
+<p><code>sudo update-alternatives --config python3</code></p>
+<p><img src="img/image-20200411134513732.png" alt="image-20200411134513732"></p>
+<p>如上，选择<strong>2</strong>来选中python3.8.</p>
+<h3 id="5-最后测试下Python版本"><a href="#5-最后测试下Python版本" class="headerlink" title="5:最后测试下Python版本"></a>5:最后测试下Python版本</h3><p>使用命令：</p>
+<p><code>python3 -V</code></p>
+<p>得到下面的输出，即在使用Python3.8.</p>
+<p><img src="img/image-20200411134959319.png" alt="image-20200411134959319"></p>
+]]></content>
+      <categories>
+        <category>工具使用</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo博客版本升级操作步骤</title>
     <url>/archives/b3bac378.html</url>
     <content><![CDATA[<h3 id="升级步骤"><a href="#升级步骤" class="headerlink" title="升级步骤"></a>升级步骤</h3><p>1、全局升级hexo-cli前，先<code>hexo -V</code>查看当前版本，然后<code>npm i hexo-cli -g</code>；</p>
@@ -201,6 +201,82 @@
       <tags>
         <tag>hexo</tag>
         <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo博客源码托管到私人仓库进行备份</title>
+    <url>/archives/dc32fcc.html</url>
+    <content><![CDATA[<p>关于Hexo博客的备份与同步，通常的方案是在同一仓库下使用两个分支来实现：master分支-保存Hexo生成的博客文件；hexo分支-保存Hexo的源码文件。这种实现方式的弊端是Hexo源文件完全暴露在公开的仓库中，对于博客可能会用到的比如<code>leancloud阅读次数管理</code>、<code>多说评论</code>等服务的私有<strong>secret key</strong>来说是一安全隐患。所以本文采用新建私人仓库来备份托管Hexo源文件。</p>
+<a id="more"></a>
+
+<h3 id="创建私有仓库"><a href="#创建私有仓库" class="headerlink" title="创建私有仓库"></a>创建私有仓库</h3><p>在github上创建私人仓库，记下仓库地址，例如：</p>
+<p><code>git@github.com:username/hexo-blog.git</code></p>
+<h3 id="建立本地git仓库"><a href="#建立本地git仓库" class="headerlink" title="建立本地git仓库"></a>建立本地git仓库</h3><p>在自己电脑上进入Hexo博客所在目录，删除第三方主题的git配置，比如<code>next</code>主题：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm -rf ./themes/next/.git</span><br></pre></td></tr></table></figure>
+
+<p>初始化本地git仓库：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p>创建一个<code>.gitignore</code>文件，并放在Hexo博客的根目录，内容如下：</p>
+<figure class="highlight x86asm"><table><tr><td class="code"><pre><span class="line"><span class="meta">.DS_Store</span></span><br><span class="line">Thumbs<span class="number">.</span><span class="built_in">db</span></span><br><span class="line"><span class="built_in">db</span><span class="number">.</span>json</span><br><span class="line">*.log</span><br><span class="line">node_modules/</span><br><span class="line"><span class="meta">public</span>/</span><br><span class="line"><span class="meta">.deploy</span>*/</span><br></pre></td></tr></table></figure>
+
+<h3 id="push到私有仓库"><a href="#push到私有仓库" class="headerlink" title="push到私有仓库"></a>push到私有仓库</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:username/hexo-blog.git</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"Hexo博客源码首次托管到私人仓库进行备份"</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p>至此就完成了本地Hexo源码的全部备份。</p>
+<h3 id="在新电脑上同步Hexo博客"><a href="#在新电脑上同步Hexo博客" class="headerlink" title="在新电脑上同步Hexo博客"></a>在新电脑上同步Hexo博客</h3><p>Hexo拉取：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:username/hexo-blog.git</span><br></pre></td></tr></table></figure>
+
+<p>这样在本地就有了备份的Hexo博客源文件。</p>
+<h3 id="新电脑上发布博客"><a href="#新电脑上发布博客" class="headerlink" title="新电脑上发布博客"></a>新电脑上发布博客</h3><p>尽管本地已拉取了博客源文件，为了发布博客还需要建立一下Hexo的环境，这里需要格外注意的一点是：<br>千万不要用<code>hexo init</code>命令。原因是当前目录已经建立了git仓库环境, <code>hexo init</code>会覆盖到当前的git环境，重建一个新的，这样和我们的私有Hexo源码仓库脱离了联系。</p>
+<p><strong>正确做法是：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>因为<code>package.json</code>里面已经保存了<code>hexo</code>的必备资源包信息，<code>npm install</code>后Hexo环境就建立起来了。</p>
+<p>接下来就可以正常的编写和发布博客了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo s		<span class="comment"># 本地预览</span></span><br><span class="line">hexo d --g	<span class="comment"># 博客发布</span></span><br></pre></td></tr></table></figure>
+
+<p>最后执行<code>git status</code>把更改的新文件<code>git add</code>和<code>git commit</code>，最后<code>git push origin master</code>到私有仓库，又会完成Hexo源码仓库的同步。</p>
+<h3 id="Hexo仓库更新"><a href="#Hexo仓库更新" class="headerlink" title="Hexo仓库更新"></a>Hexo仓库更新</h3><p>下次进行Hexo仓库拉取时执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git fetch --all <span class="comment"># 将git上所有文件拉取到本地</span></span><br><span class="line">git reset --hard origin/master  <span class="comment"># 强制将本地内容指向刚刚同步git云端内容</span></span><br></pre></td></tr></table></figure>
+
+<p>reset 对所拉取的文件不做任何处理，此处不用 pull 是因为本地尚有许多文件，使用 pull 会有一些版本冲突，解决起来也麻烦，而本地的文件都是初始化生成的文件，较拉取的库里面的文件而言基本无用，所以直接丢弃。</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo_Next主题博客接入Gitment实现评论功能</title>
+    <url>/archives/aa5c621a.html</url>
+    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p><a href="https://github.com/imsun/gitment" target="_blank" rel="noopener">Gitment</a>是作者实现的一款基于 GitHub Issues 的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的 Markdown / GFM 和代码高亮支持。尤为适合各种基于 GitHub Pages 的静态博客或项目页面。</p>
+<h4 id="接入过程"><a href="#接入过程" class="headerlink" title="接入过程"></a>接入过程</h4><h5 id="1、注册-OAuth-Application"><a href="#1、注册-OAuth-Application" class="headerlink" title="1、注册 OAuth Application"></a>1、注册 OAuth Application</h5><a id="more"></a>
+<p>通过注册地址<a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">https://github.com/settings/applications/new</a>进行注册，注册页面如下： </p>
+<p><img src="img/Reg_OAuth.PNG" alt="header"><br>注意<code>Authorization callback URL</code>填上自己网站首页url地址。<br>注册成功会得到一个 client ID 和一个 client secret，将用于以下的配置文件中。 </p>
+<h5 id="2、编辑主题配置文件-config-yml进行配置"><a href="#2、编辑主题配置文件-config-yml进行配置" class="headerlink" title="2、编辑主题配置文件_config.yml进行配置"></a>2、编辑主题配置文件_config.yml进行配置</h5><p>找到Gitment配置区域：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Gitment</span></span><br><span class="line"><span class="comment"># Introduction: https://imsun.net/posts/gitment-introduction/</span></span><br><span class="line"><span class="comment"># You can get your Github ID from https://api.github.com/users/&lt;Github username&gt;</span></span><br><span class="line"><span class="attr">gitment:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">mint:</span> <span class="literal">true</span> <span class="comment"># RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway</span></span><br><span class="line">  <span class="attr">count:</span> <span class="literal">true</span> <span class="comment"># Show comments count in post meta area</span></span><br><span class="line">  <span class="attr">lazy:</span> <span class="literal">false</span> <span class="comment"># Comments lazy loading with a button</span></span><br><span class="line">  <span class="attr">cleanly:</span> <span class="literal">true</span> <span class="comment"># Hide 'Powered by ...' on footer, and more</span></span><br><span class="line">  <span class="attr">language:</span> <span class="comment"># Force language, or auto switch by theme</span></span><br><span class="line">  <span class="attr">github_user:</span> <span class="string">yourname</span> <span class="comment"># MUST HAVE, Your Github ID</span></span><br><span class="line">  <span class="attr">github_repo:</span> <span class="string">yourname.github.io</span> <span class="comment"># MUST HAVE, The repo you use to store Gitment comments</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">d367821xxxxxxxxx</span> <span class="comment"># MUST HAVE, Github client id for the Gitment</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">02fcxxxxxxxxxxxxxx</span> <span class="comment"># EITHER this or proxy_gateway, Github access secret token for the Gitment</span></span><br><span class="line">  <span class="attr">proxy_gateway:</span> <span class="comment"># Address of api proxy, See: https://github.com/aimingoo/intersect</span></span><br><span class="line">  <span class="attr">redirect_protocol:</span> <span class="comment"># Protocol of redirect_uri with force_redirect_protocol when mint enabled</span></span><br></pre></td></tr></table></figure>
+<p>其中<code>github_user</code>为你的github用户名，<code>github_repo</code>一定要是仓库的名称，不要写成仓库地址，这里可以保持同github pages共用一个库，当然你也可以选择使用新建的仓库。<code>client_id</code>和<code>client_secret</code>就是上一步注册时得到的。</p>
+<h4 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h4><p>到此通过 hexo d 重新部署应该能看到博客文章页面下已出现Gitment评论区，不过可能存在一些问题。</p>
+<ul>
+<li>登录报错 “[object ProgressEvent]”<br><img src="img/ai_error.PNG" alt="header"><br><b>出错原因：</b>在原开发者版本中调用的js文件里，有访问gitment作者的服务器代码，而作者的服务器不好使了。具体调用的js文件可以在主题第三方插件目录下看到，打开<code>\themes\next\layout\_third-party\comments\gitment.swig</code>文件，定位到如下部分:<figure class="highlight twig"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!-- LOCAL: You can save these files to your site and update links --&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">if</span></span> theme.gitment.mint %&#125;</span></span><br><span class="line"><span class="xml">        </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">set</span></span> CommentsClass = "Gitmint" %&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://aimingoo.github.io/gitmint/style/default.css"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name">else</span> %&#125;</span></span><br><span class="line"><span class="xml">        </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">set</span></span> CommentsClass = "Gitment" %&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://imsun.github.io/gitment/style/default.css"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://imsun.github.io/gitment/dist/gitment.browser.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">endif</span></span> %&#125;</span></span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- END LOCAL --&gt;</span></span></span><br></pre></td></tr></table></figure>
+可以看到<code>gitment.browser.js</code>是原作中使用的js文件，该文件中会调用作者的服务器接口‘<a href="https://gh-oauth.imsun.net’，该接口可能已无法访问，所以我们需要自己来实现接口代替。" target="_blank" rel="noopener">https://gh-oauth.imsun.net’，该接口可能已无法访问，所以我们需要自己来实现接口代替。</a><br><b>解决方法：</b>自己的服务器中创建实现类似作者定义的接口。</li>
+<li>在自己的服务器中clone原作者使用的源文件：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/imsun/gh-oauth-server.git</span><br></pre></td></tr></table></figure></li>
+<li>进入项目目录，下载依赖并启动服务：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install &amp;&amp; nohup npm start &amp;</span><br></pre></td></tr></table></figure>
+如果服务运行成功，会在项目目录下的nohup.out文件的结尾提示正在监听3000端口，接着使用nginx搭配https反向代理转发服务器本地3000端口。这样就可以使用自己的服务器网址替换前面提到的作者的接口。</li>
+<li>我已将前面的gitment.swig文件里引用的两个js文件均作了接口替换，同时保存在了我的Hexo博客目录下，所以现在来替换swig文件中的js引用地址：<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">&lt;!-- LOCAL: You can save these files to your site and update links --&gt;</span><br><span class="line">    &#123;% if theme.gitment.mint %&#125;</span><br><span class="line">        &#123;% set CommentsClass = "Gitmint" %&#125;</span><br><span class="line">        &lt;link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css"&gt;</span><br><span class="line"><span class="deletion">-        &lt;script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="addition">+        &lt;script src="https://ai.xgoogle.xyz/js/src/gitmint.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &#123;% else %&#125;</span><br><span class="line">        &#123;% set CommentsClass = "Gitment" %&#125;</span><br><span class="line">        &lt;link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"&gt;</span><br><span class="line"><span class="deletion">-        &lt;script src="https://imsun.github.io/gitment/dist/gitment.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="addition">+        &lt;script src="https://ai.xgoogle.xyz/js/src/gitment.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">&lt;!-- END LOCAL --&gt;</span><br></pre></td></tr></table></figure>
+理论上你只需将gitment.swig文件按上面这样修改后，即可在博客中正常使用Gitment评论功能了。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>博客</tag>
+        <tag>gitment</tag>
       </tags>
   </entry>
   <entry>
@@ -250,36 +326,6 @@
       <tags>
         <tag>hexo</tag>
         <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo_Next主题博客接入Gitment实现评论功能</title>
-    <url>/archives/aa5c621a.html</url>
-    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p><a href="https://github.com/imsun/gitment" target="_blank" rel="noopener">Gitment</a>是作者实现的一款基于 GitHub Issues 的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的 Markdown / GFM 和代码高亮支持。尤为适合各种基于 GitHub Pages 的静态博客或项目页面。</p>
-<h4 id="接入过程"><a href="#接入过程" class="headerlink" title="接入过程"></a>接入过程</h4><h5 id="1、注册-OAuth-Application"><a href="#1、注册-OAuth-Application" class="headerlink" title="1、注册 OAuth Application"></a>1、注册 OAuth Application</h5><a id="more"></a>
-<p>通过注册地址<a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">https://github.com/settings/applications/new</a>进行注册，注册页面如下： </p>
-<p><img src="img/Reg_OAuth.PNG" alt="header"><br>注意<code>Authorization callback URL</code>填上自己网站首页url地址。<br>注册成功会得到一个 client ID 和一个 client secret，将用于以下的配置文件中。 </p>
-<h5 id="2、编辑主题配置文件-config-yml进行配置"><a href="#2、编辑主题配置文件-config-yml进行配置" class="headerlink" title="2、编辑主题配置文件_config.yml进行配置"></a>2、编辑主题配置文件_config.yml进行配置</h5><p>找到Gitment配置区域：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Gitment</span></span><br><span class="line"><span class="comment"># Introduction: https://imsun.net/posts/gitment-introduction/</span></span><br><span class="line"><span class="comment"># You can get your Github ID from https://api.github.com/users/&lt;Github username&gt;</span></span><br><span class="line"><span class="attr">gitment:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">mint:</span> <span class="literal">true</span> <span class="comment"># RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway</span></span><br><span class="line">  <span class="attr">count:</span> <span class="literal">true</span> <span class="comment"># Show comments count in post meta area</span></span><br><span class="line">  <span class="attr">lazy:</span> <span class="literal">false</span> <span class="comment"># Comments lazy loading with a button</span></span><br><span class="line">  <span class="attr">cleanly:</span> <span class="literal">true</span> <span class="comment"># Hide 'Powered by ...' on footer, and more</span></span><br><span class="line">  <span class="attr">language:</span> <span class="comment"># Force language, or auto switch by theme</span></span><br><span class="line">  <span class="attr">github_user:</span> <span class="string">yourname</span> <span class="comment"># MUST HAVE, Your Github ID</span></span><br><span class="line">  <span class="attr">github_repo:</span> <span class="string">yourname.github.io</span> <span class="comment"># MUST HAVE, The repo you use to store Gitment comments</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">d367821xxxxxxxxx</span> <span class="comment"># MUST HAVE, Github client id for the Gitment</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">02fcxxxxxxxxxxxxxx</span> <span class="comment"># EITHER this or proxy_gateway, Github access secret token for the Gitment</span></span><br><span class="line">  <span class="attr">proxy_gateway:</span> <span class="comment"># Address of api proxy, See: https://github.com/aimingoo/intersect</span></span><br><span class="line">  <span class="attr">redirect_protocol:</span> <span class="comment"># Protocol of redirect_uri with force_redirect_protocol when mint enabled</span></span><br></pre></td></tr></table></figure>
-<p>其中<code>github_user</code>为你的github用户名，<code>github_repo</code>一定要是仓库的名称，不要写成仓库地址，这里可以保持同github pages共用一个库，当然你也可以选择使用新建的仓库。<code>client_id</code>和<code>client_secret</code>就是上一步注册时得到的。</p>
-<h4 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h4><p>到此通过 hexo d 重新部署应该能看到博客文章页面下已出现Gitment评论区，不过可能存在一些问题。</p>
-<ul>
-<li>登录报错 “[object ProgressEvent]”<br><img src="img/ai_error.PNG" alt="header"><br><b>出错原因：</b>在原开发者版本中调用的js文件里，有访问gitment作者的服务器代码，而作者的服务器不好使了。具体调用的js文件可以在主题第三方插件目录下看到，打开<code>\themes\next\layout\_third-party\comments\gitment.swig</code>文件，定位到如下部分:<figure class="highlight twig"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!-- LOCAL: You can save these files to your site and update links --&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">if</span></span> theme.gitment.mint %&#125;</span></span><br><span class="line"><span class="xml">        </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">set</span></span> CommentsClass = "Gitmint" %&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://aimingoo.github.io/gitmint/style/default.css"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name">else</span> %&#125;</span></span><br><span class="line"><span class="xml">        </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">set</span></span> CommentsClass = "Gitment" %&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://imsun.github.io/gitment/style/default.css"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://imsun.github.io/gitment/dist/gitment.browser.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="template-tag">&#123;% <span class="name"><span class="keyword">endif</span></span> %&#125;</span></span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- END LOCAL --&gt;</span></span></span><br></pre></td></tr></table></figure>
-可以看到<code>gitment.browser.js</code>是原作中使用的js文件，该文件中会调用作者的服务器接口‘<a href="https://gh-oauth.imsun.net’，该接口可能已无法访问，所以我们需要自己来实现接口代替。" target="_blank" rel="noopener">https://gh-oauth.imsun.net’，该接口可能已无法访问，所以我们需要自己来实现接口代替。</a><br><b>解决方法：</b>自己的服务器中创建实现类似作者定义的接口。</li>
-<li>在自己的服务器中clone原作者使用的源文件：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/imsun/gh-oauth-server.git</span><br></pre></td></tr></table></figure></li>
-<li>进入项目目录，下载依赖并启动服务：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install &amp;&amp; nohup npm start &amp;</span><br></pre></td></tr></table></figure>
-如果服务运行成功，会在项目目录下的nohup.out文件的结尾提示正在监听3000端口，接着使用nginx搭配https反向代理转发服务器本地3000端口。这样就可以使用自己的服务器网址替换前面提到的作者的接口。</li>
-<li>我已将前面的gitment.swig文件里引用的两个js文件均作了接口替换，同时保存在了我的Hexo博客目录下，所以现在来替换swig文件中的js引用地址：<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line">&lt;!-- LOCAL: You can save these files to your site and update links --&gt;</span><br><span class="line">    &#123;% if theme.gitment.mint %&#125;</span><br><span class="line">        &#123;% set CommentsClass = "Gitmint" %&#125;</span><br><span class="line">        &lt;link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css"&gt;</span><br><span class="line"><span class="deletion">-        &lt;script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="addition">+        &lt;script src="https://ai.xgoogle.xyz/js/src/gitmint.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &#123;% else %&#125;</span><br><span class="line">        &#123;% set CommentsClass = "Gitment" %&#125;</span><br><span class="line">        &lt;link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"&gt;</span><br><span class="line"><span class="deletion">-        &lt;script src="https://imsun.github.io/gitment/dist/gitment.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="addition">+        &lt;script src="https://ai.xgoogle.xyz/js/src/gitment.browser.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">&lt;!-- END LOCAL --&gt;</span><br></pre></td></tr></table></figure>
-理论上你只需将gitment.swig文件按上面这样修改后，即可在博客中正常使用Gitment评论功能了。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>博客</tag>
-        <tag>gitment</tag>
       </tags>
   </entry>
   <entry>
